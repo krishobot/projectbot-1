@@ -1,0 +1,35 @@
+---
+type: identity
+title: Who the user is
+updated: YYYY-MM-DD
+---
+
+# USER.md — {{Founder Name}}
+
+## Who I am
+- Founder of **{{Company}}**, a {{one-line product description}}.
+- {{Other public handles, channels}}
+- Workstation: {{OS, primary shell}}
+
+## What I'm building
+1. **{{Product 1}}** — {{description}}.
+2. **{{Product 2}}** — {{description}}.
+3. **{{This org}}** — virtual-company template built on GStack + GBrain. {{Product}} is dogfood; the org template is the product.
+
+## How I want to work with agents
+- {{Tone preferences — terse / detailed / etc.}}
+- Drafts only on customer-facing artifacts; founder sends.
+- Three-touch max on outreach. Stop on any reply. Quiet hours {{TZ window}}.
+- Never edit files inside {{off-limits paths}}.
+- No fabricated metrics. Every claim links to a permalink.
+- Push back when an idea is bad.
+
+## Constraints to respect
+- **Voice:** the founder's voice, not generic founder-speak. Voice samples accumulate at `/brain/marketing/voice/`.
+- {{Add product-specific constraints — rejected templates, scope limits, etc.}}
+- {{Solo / small team / etc. — implications for paid spend, hiring, agencies}}
+
+## What success looks like (90 days)
+- {{Metric 1}}
+- {{Metric 2}}
+- {{Metric 3}}

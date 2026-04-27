@@ -1,0 +1,34 @@
+---
+type: identity
+title: The org's cadence
+updated: YYYY-MM-DD
+---
+
+# HEARTBEAT.md
+
+## Daily
+- **{{morning local time}}** — Customer Success runs `daily-task-prep` + `briefing`. Output: `brain/briefings/{date}.md`.
+- **{{after morning}}** — Founder reads briefing; flags anything for the day.
+- **Throughout day** — `signal-detector` runs continuously; new ideas/entities filed by Marketing or Product.
+- **Twice daily** — Marketing's community-manager drafts replies to comments + DMs (manual send by founder).
+- **{{evening local time}} hard stop** — no automated outbound after this hour. `cron-scheduler` enforces.
+
+## Weekly
+- **{{Day}} evening** — Marketing strategist runs week's content plan. Founder approves.
+- **{{Day}} afternoon** — Sales follow-up sweep (touch 2/3 on cold sequences, capped at 3 touches).
+- **{{Day}} evening** — Executive runs `/retro` across all projects. Output: `brain/retros/wk-NN.md`.
+
+## Monthly
+- **First {{day}}** — `gbrain doctor` health check + brain-maintenance pass via `maintain`.
+- **First {{day}}** — Data team runs retrieval evals (`gbrain eval`) to catch quality drift.
+- **End of month** — Executive reviews 90-day goals (in `identity/USER.md`) against actuals.
+
+## Per-event
+- **New product idea** → Executive `/office-hours` first.
+- **Production bug** → QA `/investigate` first (no fixes without diagnosis).
+- **Ready to ship** → Release `/ship` (one canonical command — never hand-roll).
+- **Post-ship, always** → `/document-release` (mandatory, per gstack convention).
+
+## Pause / quiet
+- **Founder away ≥ 24 h** → all "drafts → founder approves" gates hard-pause. Agents queue work to `brain/inbox/founder/` and stop.
+- **Workstation reboot** → `smoke-test` first; resume only after all checks pass.

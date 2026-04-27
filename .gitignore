@@ -1,0 +1,50 @@
+# Brain database — never commit binary DB
+.gbrain/
+
+# Cloned upstream skills — install via setup script, not by bundling
+gstack/
+gbrain/
+
+# Personal / local-only files (kept out of public repos)
+CLAUDE.local.md
+*.local.md
+brain/identity/*.local.md
+brain/people/
+brain/companies/
+brain/deals/
+brain/meetings/
+brain/inbox/
+brain/marketing/voice/
+brain/marketing/signals/
+brain/security/audits/
+brain/incidents/
+brain/runbooks/
+
+# Node / Bun
+node_modules/
+bun.lockb
+*.tsbuildinfo
+dist/
+build/
+.next/
+
+# Secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+service-account*.json
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+*.swp
+.vscode/
+.idea/
+
+# Compiled binaries
+*.exe
+*.dll
+*.so
+*.dylib
