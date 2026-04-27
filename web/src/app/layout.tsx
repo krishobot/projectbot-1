@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { getCurrentUser } from "@/lib/supabase/server";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -7,7 +8,10 @@ export const metadata: Metadata = {
   description: "Run a 13-team virtual company on top of GStack and GBrain. Powered by tbrain.",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const user = await getCurrentUser();
+  const supabaseConfigured = !!(process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
+
   return (
     <html lang="en" className="dark h-full antialiased">
       <body className="bg-zinc-950 text-zinc-100 min-h-full flex flex-col">
@@ -25,6 +29,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <nav className="flex items-center gap-6 text-sm">
               <Link href="/" className="text-zinc-300 hover:text-white transition">Org</Link>
               <Link href="/setup/mcp" className="text-zinc-300 hover:text-white transition">Connect Claude</Link>
+              {supabaseConfigured && (
+                user ? (
+                  <span className="text-zinc-400 text-xs font-mono">{user.email}</span>
+                ) : (
+                  <Link href="/login" className="rounded-md bg-emerald-500 hover:bg-emerald-400 text-zinc-950 px-3 py-1 text-xs font-semibold transition">
+                    Sign in
+                  </Link>
+                )
+              )}
               <a
                 href="https://github.com/krishobot/projectbot-1"
                 target="_blank"

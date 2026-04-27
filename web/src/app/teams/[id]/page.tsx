@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getAllTeams, getTeam } from "@/lib/teams";
+import { getDesktopHealth } from "@/lib/desktop";
+import { launchTeamAction } from "./actions";
 
 export const dynamic = "force-dynamic";
 
@@ -14,6 +16,8 @@ export default async function TeamPage({ params }: Props) {
   const { id } = await params;
   const team = getTeam(id);
   if (!team) notFound();
+  const daemon = await getDesktopHealth();
+  const daemonUp = !!daemon;
 
   return (
     <div className="space-y-10">
@@ -26,22 +30,27 @@ export default async function TeamPage({ params }: Props) {
         <p className="text-zinc-400 mt-3 max-w-2xl leading-relaxed">{team.charter}</p>
       </div>
 
-      <div className="flex flex-wrap gap-3">
-        <button
-          type="button"
-          className="rounded-lg bg-emerald-500 hover:bg-emerald-400 text-zinc-950 px-4 py-2 text-sm font-semibold transition disabled:opacity-50 disabled:cursor-not-allowed"
-          disabled
-          title="Requires the astack desktop companion (coming v0.2)"
-        >
-          ⌘ Launch terminal as {team.name}
-        </button>
-        <Link
-          href="/setup/mcp"
-          className="rounded-lg border border-zinc-700 hover:border-zinc-500 hover:bg-zinc-900 px-4 py-2 text-sm transition"
-        >
-          Connect this team to Claude
-        </Link>
-      </div>
+      <section className="rounded-xl border border-zinc-800 bg-zinc-900/30 p-5">
+        <h2 className="text-sm font-semibold tracking-tight text-zinc-300 uppercase mb-4">Launch session</h2>
+        <p className="text-xs text-zinc-500 mb-4 leading-relaxed">
+          Spawns a new terminal scoped to this team — the team manifest is appended to the agent&apos;s system prompt, so the model picks up the team&apos;s charter, skill allowlist, and brain-page ownership before you say a word.
+        </p>
+        <div className="flex flex-wrap gap-3">
+          <LaunchForm teamId={team.id} client="claude" daemonUp={daemonUp} label="Claude Code" />
+          <LaunchForm teamId={team.id} client="antigravity" daemonUp={daemonUp} label="Antigravity" />
+          <Link
+            href="/setup/mcp"
+            className="rounded-lg border border-zinc-700 hover:border-zinc-500 hover:bg-zinc-900 px-4 py-2 text-sm transition"
+          >
+            Connect this team to your Claude
+          </Link>
+        </div>
+        {!daemonUp && (
+          <p className="text-[11px] text-amber-400 mt-3">
+            Desktop companion offline — start it with <code className="bg-zinc-900 px-1 rounded">cd desktop && bun run start</code> to enable terminal launching.
+          </p>
+        )}
+      </section>
 
       <section className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <SkillsCard label="GStack skills" skills={team.gstackSkills} colorClass="text-cyan-400" />
@@ -64,6 +73,23 @@ export default async function TeamPage({ params }: Props) {
         <pre className="rounded-xl border border-zinc-900 bg-zinc-950 p-5 text-xs text-zinc-400 leading-relaxed overflow-x-auto whitespace-pre-wrap font-mono">{team.body}</pre>
       </section>
     </div>
+  );
+}
+
+function LaunchForm({ teamId, client, daemonUp, label }: { teamId: string; client: "claude" | "antigravity"; daemonUp: boolean; label: string }) {
+  return (
+    <form action={launchTeamAction}>
+      <input type="hidden" name="teamId" value={teamId} />
+      <input type="hidden" name="client" value={client} />
+      <button
+        type="submit"
+        disabled={!daemonUp}
+        className="rounded-lg bg-emerald-500 hover:bg-emerald-400 text-zinc-950 px-4 py-2 text-sm font-semibold transition disabled:bg-zinc-800 disabled:text-zinc-600 disabled:cursor-not-allowed"
+        title={daemonUp ? `Launch a new terminal as ${label}` : "Desktop companion required"}
+      >
+        ⌘ Launch in {label}
+      </button>
+    </form>
   );
 }
 
