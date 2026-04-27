@@ -26,12 +26,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <Link href="/" className="text-zinc-300 hover:text-white transition">Org</Link>
               <Link href="/setup/mcp" className="text-zinc-300 hover:text-white transition">Connect Claude</Link>
               <a
-                href="https://github.com/garrytan/gstack"
+                href="https://github.com/krishobot/projectbot-1"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-zinc-500 hover:text-zinc-300 transition text-xs"
               >
-                upstream ↗
+                repo ↗
               </a>
             </nav>
           </div>
