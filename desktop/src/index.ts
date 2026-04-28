@@ -134,6 +134,5 @@ function jsonResponse(body: unknown, origin: string | null): Response {
 }
 
 console.log(`astack desktop companion listening on http://127.0.0.1:${server.port}`);
-console.log(`token: ${TOKEN}`);
 console.log(`astack root: ${ASTACK_ROOT}`);
 console.log(`token file: ${TOKEN_FILE}`);

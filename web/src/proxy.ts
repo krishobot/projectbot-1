@@ -24,8 +24,13 @@ export async function proxy(req: NextRequest) {
     },
   });
 
-  // Refresh session cookie if it's about to expire.
-  await supabase.auth.getUser();
+  // Refresh session cookie if it's about to expire. If Supabase is unreachable,
+  // log and pass through — an auth-service outage must not block every page.
+  try {
+    await supabase.auth.getUser();
+  } catch (err) {
+    console.warn("[proxy] supabase auth refresh failed, continuing without refresh:", err);
+  }
   return res;
 }
 

@@ -32,24 +32,20 @@ export async function handleLaunch(ctx: Ctx, input: LaunchInput) {
 
   try {
     if (isWindows) {
-      // Windows Terminal: open a new tab with title=teamName, cwd=astackRoot, run claude
+      // Windows Terminal: open a new tab with title=teamName, cwd=astackRoot, run claude.
+      // The argument to `cmd /k` is a single command-line string that cmd.exe re-parses,
+      // so every arg containing whitespace or cmd metachars must be wrapped in quotes —
+      // otherwise an astack root with a space (e.g. "Anirudhs org") splits the path
+      // mid-arg and Claude opens with the wrong file.
+      const cmdLine = [cmd, ...args].map(cmdQuote).join(" ");
       spawn(
         "wt.exe",
-        [
-          "new-tab",
-          "--title",
-          teamName,
-          "-d",
-          ctx.astackRoot,
-          "cmd",
-          "/k",
-          [cmd, ...args].join(" "),
-        ],
+        ["new-tab", "--title", teamName, "-d", ctx.astackRoot, "cmd", "/k", cmdLine],
         { detached: true, stdio: "ignore" }
       ).unref();
     } else if (isMac) {
       // macOS: AppleScript to open a new Terminal.app tab with the command
-      const script = `tell application "Terminal" to do script "cd ${shQ(ctx.astackRoot)} && ${cmd} ${args.map(shQ).join(" ")}"`;
+      const script = `tell application "Terminal" to do script "cd ${appleScriptQuote(ctx.astackRoot)} && ${cmd} ${args.map(appleScriptQuote).join(" ")}"`;
       spawn("osascript", ["-e", script], { detached: true, stdio: "ignore" }).unref();
     } else {
       // Linux: try x-terminal-emulator first, fall back to gnome-terminal
@@ -66,6 +62,14 @@ export async function handleLaunch(ctx: Ctx, input: LaunchInput) {
   }
 }
 
-function shQ(s: string): string {
-  return `"${s.replace(/(["\\$`])/g, "\\$1")}"`;
+// cmd.exe quoting: wrap in double quotes if the arg contains whitespace or cmd
+// metachars; escape embedded double quotes by doubling them.
+export function cmdQuote(s: string): string {
+  if (!/[\s"&|<>^]/.test(s)) return s;
+  return `"${s.replace(/"/g, '""')}"`;
+}
+
+// AppleScript do-script quoting: backslash-escape backslashes and double quotes.
+export function appleScriptQuote(s: string): string {
+  return `"${s.replace(/\\/g, "\\\\").replace(/"/g, '\\"')}"`;
 }
