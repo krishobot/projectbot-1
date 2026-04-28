@@ -84,16 +84,16 @@ export default async function PacksCatalogPage() {
               body="Buy once. Curation evolves. We email you when a meaningful update lands."
             />
             <Feature
-              title="Buyer-only Discord."
-              body="One community across all packs. High-intent founders running the same playbook. Not a free Slack with 5,000 lurkers — a small room of buyers."
+              title="Buyer Discord."
+              body="A small room of buyers running the same playbook. Not a free Slack with 5,000 lurkers."
             />
             <Feature
-              title="Monthly live office hours."
-              body="4th Wednesday of each month, 60 minutes on Zoom. Bring questions, watch other founders work through theirs. Capped at 50 buyers per call so you actually get time."
+              title="Real walkthrough video."
+              body="15-22 minutes per pack. Install → first day → first real workflow. Recorded against actual usage, not a demo."
             />
             <Feature
-              title="Dual checkout — UPI or card."
-              body="Indian buyers: Razorpay (UPI / cards / netbanking) in INR. Everywhere else: Stripe (cards) in USD. Switch currency anytime via the toggle above."
+              title="UPI for India, cards everywhere."
+              body="Checkout via Gumroad — Indian buyers see UPI, cards, netbanking; international buyers see cards. Refunds back to source within 48 hours."
             />
           </div>
         </section>

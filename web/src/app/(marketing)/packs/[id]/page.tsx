@@ -77,7 +77,7 @@ export default async function PackLandingPage({ params }: Props) {
                 {pack.shipping ?? "Stay tuned."}
               </div>
             ) : (
-              <BuyButton packId={pack.id} />
+              <BuyButton packId={pack.id} gumroadUrl={pack.gumroadUrl} />
             )}
             {showBundleCTA && liveBundle && (
               <Link
@@ -163,10 +163,10 @@ export default async function PackLandingPage({ params }: Props) {
               Ready to install {pack.name}?
             </h2>
             <p className="text-zinc-400 mb-8 max-w-xl mx-auto">
-              30 minutes from purchase to first daily briefing. Buyer-only Discord access on
-              checkout.
+              Checkout via Gumroad — UPI for Indian buyers, cards everywhere else. Discord
+              invite arrives by email after purchase.
             </p>
-            <BuyButton packId={pack.id} large />
+            <BuyButton packId={pack.id} gumroadUrl={pack.gumroadUrl} large />
           </section>
         )}
       </div>
@@ -174,18 +174,35 @@ export default async function PackLandingPage({ params }: Props) {
   );
 }
 
-// Placeholder buy button. Wires to /packs/[id]/install for v1; will route to
-// Razorpay / Stripe Checkout sessions once the payment provider entities are
-// set up (open question #2 in the CEO plan).
-function BuyButton({ packId, large = false }: { packId: string; large?: boolean }) {
+// Ship-light buy button: opens the pack's Gumroad listing in a new tab when
+// the URL is set. Falls back to the demo install page when the listing isn't
+// up yet (ship-light Day 1: list packs on Gumroad → flip the URL on this site).
+function BuyButton({
+  packId,
+  gumroadUrl,
+  large = false,
+}: {
+  packId: string;
+  gumroadUrl?: string;
+  large?: boolean;
+}) {
   const cls = large
     ? "rounded-lg bg-emerald-500 hover:bg-emerald-400 text-zinc-950 px-6 py-3.5 text-base font-semibold transition inline-block"
     : "rounded-lg bg-emerald-500 hover:bg-emerald-400 text-zinc-950 px-5 py-3 text-sm font-semibold transition";
   const label =
     packId === "specialty-bundle" || packId === "founder-os" ? "the bundle" : packId;
+
+  if (gumroadUrl) {
+    return (
+      <a href={gumroadUrl} target="_blank" rel="noopener noreferrer" className={cls}>
+        Buy {label} →
+      </a>
+    );
+  }
+  // Fallback: preview the install page until Gumroad listing is up.
   return (
     <Link href={`/packs/${packId}/install?demo=1`} className={cls}>
-      Buy {label} →
+      Buy {label} (preview) →
     </Link>
   );
 }

@@ -31,6 +31,7 @@ export type Pack = {
   audience: string;
   shipping?: string;                             // ETA for coming-soon packs
   bundleOf?: string[];                           // for tier=bundle, the pack ids
+  gumroadUrl?: string;                           // ship-light: direct buy link
 };
 
 export const PACKS: Pack[] = [
@@ -44,12 +45,12 @@ export const PACKS: Pack[] = [
       "Customer Success, Sales, and Operations teams tuned for client-shop owners. Brain templates for client onboarding, monthly reporting, retainer pipelines, and scope-creep defense.",
     status: "live",
     price: { usd: 50, inr: 3999 },
+    gumroadUrl: "https://gumroad.com/l/astack-agency-pack",
     highlights: [
       "3 tuned team manifests (10 Sales, 11 Customer Success, 12 Operations)",
       "Brain templates for client portfolios, retainer math, monthly reports",
       "Client-onboarding playbook (week 1 → month 3)",
-      "Buyer-only Discord access (12 months)",
-      "Monthly live office hours with the founder",
+      "Buyer Discord access",
       "Lifetime v1.x updates",
     ],
     audience:
@@ -64,12 +65,12 @@ export const PACKS: Pack[] = [
       "Engineering, Product, and Release teams tuned for one-engineer startups. Brain templates for architecture decisions, sprint cadence, customer feedback ingestion, and release rituals.",
     status: "live",
     price: { usd: 50, inr: 3999 },
+    gumroadUrl: "https://gumroad.com/l/astack-technical-founder-pack",
     highlights: [
       "3 tuned team manifests (02 Product, 03 Engineering, 06 Release / DevOps)",
       "Brain templates for ADRs, customer-feedback ingestion, sprint retros",
       "Solo-founder release ritual (ship → canary → document)",
-      "Buyer-only Discord access (12 months)",
-      "Monthly live office hours with the founder",
+      "Buyer Discord access",
       "Lifetime v1.x updates",
     ],
     audience:
@@ -84,16 +85,16 @@ export const PACKS: Pack[] = [
       "agency-pack + technical-founder-pack. For founders who run both motions — a small client shop alongside a side-SaaS, or a dev consultancy moving toward product.",
     status: "live",
     price: { usd: 80, inr: 6499 },
+    gumroadUrl: "https://gumroad.com/l/astack-specialty-bundle",
     bundleOf: ["agency-pack", "technical-founder-pack"],
     highlights: [
       "Both specialty packs (agency + technical-founder)",
-      "Single Discord across both packs — meet founders running both motions",
-      "Monthly office hours — same room",
+      "Single Discord across both packs",
       "Lifetime v1.x updates across both",
       "Save $20 vs buying separately",
     ],
     audience:
-      "Founders running client work AND building a product. The combined brain spans both motions; one community, one set of office hours.",
+      "Founders running client work AND building a product. The combined brain spans both motions; one community.",
   },
 
   // ── COMING SOON (price TBD) ─────────────────────────────────────────────
