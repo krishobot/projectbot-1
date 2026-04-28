@@ -17,7 +17,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <body className="bg-zinc-950 text-zinc-100 min-h-full flex flex-col">
         <header className="border-b border-zinc-800 bg-zinc-950/80 backdrop-blur sticky top-0 z-10">
           <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-            <Link href="/" className="flex items-center gap-3 group">
+            <Link href="/" className="flex items-center gap-3 group min-h-11 -my-2 py-2">
               <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-emerald-400 to-cyan-500 flex items-center justify-center font-bold text-zinc-950 text-sm">
                 a
               </div>
@@ -26,14 +26,14 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                 <div className="text-[11px] text-zinc-500">+ tbrain</div>
               </div>
             </Link>
-            <nav className="flex items-center gap-6 text-sm">
-              <Link href="/" className="text-zinc-300 hover:text-white transition">Org</Link>
-              <Link href="/setup/mcp" className="text-zinc-300 hover:text-white transition">Connect Claude</Link>
+            <nav className="flex items-center gap-2 text-sm">
+              <Link href="/" className="text-zinc-300 hover:text-white transition px-3 py-3 -my-1">Org</Link>
+              <Link href="/setup/mcp" className="text-zinc-300 hover:text-white transition px-3 py-3 -my-1">Connect Claude</Link>
               {supabaseConfigured && (
                 user ? (
-                  <span className="text-zinc-400 text-xs font-mono">{user.email}</span>
+                  <span className="text-zinc-400 text-xs font-mono px-3">{user.email}</span>
                 ) : (
-                  <Link href="/login" className="rounded-md bg-emerald-500 hover:bg-emerald-400 text-zinc-950 px-3 py-1 text-xs font-semibold transition">
+                  <Link href="/login" className="rounded-md bg-emerald-500 hover:bg-emerald-400 text-zinc-950 px-3 py-2 text-xs font-semibold transition">
                     Sign in
                   </Link>
                 )
@@ -42,7 +42,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                 href="https://github.com/krishobot/projectbot-1"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-zinc-500 hover:text-zinc-300 transition text-xs"
+                className="text-zinc-500 hover:text-zinc-300 transition text-xs px-3 inline-flex items-center min-h-11 -my-1"
               >
                 repo ↗
               </a>
