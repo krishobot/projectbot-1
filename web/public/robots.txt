@@ -1,0 +1,16 @@
+# astack — robots policy
+#
+# Marketing routes are indexable: /, /packs, /packs/[id]
+# Workspace + auth + pack-install routes are not — they're product surface,
+# not content people should land on cold.
+
+User-agent: *
+Allow: /
+
+Disallow: /app
+Disallow: /app/
+Disallow: /teams/
+Disallow: /setup/
+Disallow: /login
+Disallow: /auth/
+Disallow: /packs/*/install

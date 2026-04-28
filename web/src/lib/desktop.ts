@@ -19,7 +19,16 @@ function readToken(): string | null {
   }
 }
 
+// On Vercel (or any hosted environment), the desktop daemon at 127.0.0.1:7331
+// is unreachable — it lives on the user's local machine, not the server. Skip
+// the fetch entirely instead of paying ~50ms per render for guaranteed-failed
+// TCP attempts. Detect via process.env.VERCEL or an explicit ASTACK_HOSTED=1.
+const IS_HOSTED = !!(process.env.VERCEL || process.env.ASTACK_HOSTED === "1");
+
 async function call<T = unknown>(method: "GET" | "POST", pathPart: string, body?: unknown): Promise<T> {
+  if (IS_HOSTED) {
+    throw new Error(`desktop daemon unavailable in hosted mode (${pathPart})`);
+  }
   const token = readToken();
   const headers: Record<string, string> = { "Content-Type": "application/json" };
   if (token && pathPart !== "/health") headers.Authorization = `Bearer ${token}`;
