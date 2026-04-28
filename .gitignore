@@ -52,3 +52,6 @@ Thumbs.db
 *.so
 *.dylib
 .gstack/
+
+# Pack zips — built artifacts. Regenerate with packs/build-packs.sh.
+packs/dist/
