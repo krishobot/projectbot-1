@@ -40,14 +40,18 @@ export default async function TeamPage({ params }: Props) {
           <LaunchForm teamId={team.id} client="antigravity" daemonUp={daemonUp} label="Antigravity" />
           <Link
             href="/setup/mcp"
-            className="rounded-lg border border-zinc-700 hover:border-zinc-500 hover:bg-zinc-900 px-4 py-2 text-sm transition"
+            className={
+              daemonUp
+                ? "rounded-lg border border-zinc-700 hover:border-zinc-500 hover:bg-zinc-900 px-4 py-2 text-sm transition"
+                : "rounded-lg bg-emerald-500 hover:bg-emerald-400 text-zinc-950 px-4 py-2 text-sm font-semibold transition"
+            }
           >
-            Connect this team to your Claude
+            {daemonUp ? "Connect this team to your Claude" : "Connect to your Claude →"}
           </Link>
         </div>
         {!daemonUp && (
           <p className="text-[11px] text-amber-400 mt-3">
-            Desktop companion offline — start it with <code className="bg-zinc-900 px-1 rounded">cd desktop && bun run start</code> to enable terminal launching.
+            Desktop companion offline — start it with <code className="bg-zinc-900 px-1 rounded">cd desktop && bun run start</code> to launch terminals from here.
           </p>
         )}
       </section>
