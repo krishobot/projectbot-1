@@ -18,9 +18,9 @@ export default async function McpSetupPage() {
   const daemonUp = !!health;
 
   return (
-    <div className="space-y-10 max-w-3xl">
+    <div className="space-y-10 max-w-3xl mx-auto px-6 py-12">
       <div>
-        <Link href="/" className="text-xs text-zinc-500 hover:text-zinc-300 transition">← back to org</Link>
+        <Link href="/" className="text-xs text-zinc-500 hover:text-zinc-300 transition">← back home</Link>
         <h1 className="text-3xl font-semibold tracking-tight mt-3">Connect your Claude to tbrain</h1>
         <p className="text-zinc-400 mt-3 leading-relaxed">
           tbrain ships an MCP server (gbrain&apos;s under the hood). Point your Claude Desktop or Claude Code at it and every chat reads and writes the same brain your astack agents do — same people, same companies, same deals, same memory.

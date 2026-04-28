@@ -21,14 +21,14 @@ export default async function LoginPage() {
           <code className="font-mono bg-zinc-900 px-1 rounded">NEXT_PUBLIC_SUPABASE_ANON_KEY</code> in <code className="font-mono bg-zinc-900 px-1 rounded">web/.env.local</code> and restart.
         </p>
         <Link href="/" className="inline-block mt-8 text-emerald-400 hover:text-emerald-300 text-sm">
-          ← back to org
+          ← back home
         </Link>
       </div>
     );
   }
 
   const user = await getCurrentUser();
-  if (user) redirect("/");
+  if (user) redirect("/app");
 
   return (
     <div className="max-w-sm mx-auto py-16">

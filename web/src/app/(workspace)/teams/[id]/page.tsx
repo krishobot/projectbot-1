@@ -22,7 +22,7 @@ export default async function TeamPage({ params }: Props) {
   return (
     <div className="space-y-10">
       <div>
-        <Link href="/" className="text-xs text-zinc-500 hover:text-zinc-300 transition">← all teams</Link>
+        <Link href="/app" className="text-xs text-zinc-500 hover:text-zinc-300 transition">← workspace</Link>
         <h1 className="text-3xl font-semibold tracking-tight mt-3">
           <span className="text-zinc-500 font-mono mr-3">{team.number}</span>
           {team.name}
