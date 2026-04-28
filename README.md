@@ -2,6 +2,8 @@
 
 The agent workspace for shipping a company by yourself. Thirteen specialised AI teams wired into a persistent markdown brain. Open source, MIT.
 
+**Live:** https://projectbot-1.vercel.app · **Pack catalog:** https://projectbot-1.vercel.app/packs
+
 - **astack** — the role layer. Specialised CEO / Engineering / Design / QA / Release / Marketing / Sales / Customer Success / Ops / Data / Security / DevEx / Product agents that hand off work between each other through markdown files. The 13-team org chart, the SaaS console, the desktop companion.
 - **tbrain** — the memory layer. Markdown source-of-truth + Postgres + pgvector. Every person, company, deal, meeting, idea, and decision your org touches is queryable by every team. Local-first via PGLite, hosted via Supabase, accessible to Claude Desktop / Claude Code via MCP.
 

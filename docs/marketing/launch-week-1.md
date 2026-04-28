@@ -1,5 +1,9 @@
 # Launch week 1 — astack packs ship-light
 
+**Live URL:** https://projectbot-1.vercel.app
+**Pack catalog:** https://projectbot-1.vercel.app/packs
+**OSS:** https://github.com/krishobot/projectbot-1
+
 Soft launch to personal audience. Goal for the 7-day window: **first paid sale + signal on which pack resonates** (agency vs technical-founder vs bundle).
 
 Voice: **founder's personal voice** (direct, terse, no AI vocabulary, no em dashes). Audience: solopreneurs building anything, broadly. OnlyKrida stays in reserve for the eventual growth-pack launch.
@@ -100,13 +104,14 @@ same brain across both. one buyer community. honestly the right shape if you str
 ### Tweet 7 (CTA + OSS provenance)
 
 ```
-buy:
+see all three: projectbot-1.vercel.app/packs
+
+direct buy:
 agency → tanirudh.gumroad.com/l/agencypack
 tech-founder → tanirudh.gumroad.com/l/Technicalfounderpack
 bundle → tanirudh.gumroad.com/l/Specialtypack
 
-the OSS workspace is free, MIT: github.com/krishobot/projectbot-1
-the packs are the curated configs that turn it into something you'd actually buy.
+OSS workspace is free, MIT: github.com/krishobot/projectbot-1
 ```
 
 ### Tweet 8 (Q+A + retainability)
@@ -162,11 +167,14 @@ First-comment trick on LinkedIn: post the actual buy links as a reply to your ow
 ```
 Comment 1 (post immediately after publishing):
 
+See all three: projectbot-1.vercel.app/packs
+
+Direct buy:
 agency-pack: tanirudh.gumroad.com/l/agencypack
 technical-founder-pack: tanirudh.gumroad.com/l/Technicalfounderpack
 bundle: tanirudh.gumroad.com/l/Specialtypack
 
-OSS: github.com/krishobot/projectbot-1
+OSS workspace (free, MIT): github.com/krishobot/projectbot-1
 ```
 
 ---
