@@ -21,9 +21,10 @@ astack/
 
 ## Reading order
 
-1. **`ORG.md`** — table of every team and the skills it owns. Skim first.
-2. **`teams/01-executive.md`** — Office of the CEO. Every workflow starts here.
-3. The team file relevant to the task at hand (`teams/09-marketing.md` for a campaign, `teams/05-qa-quality.md` for a bug, etc.).
+1. **`MANUAL.md`** — full user guide: install, identity setup, daily/weekly cadence, the 13 teams, brain conventions, common workflows, troubleshooting.
+2. **`ORG.md`** — table of every team and the skills it owns.
+3. **`teams/01-executive.md`** — Office of the CEO. Every workflow starts here.
+4. The team file relevant to the task at hand (`teams/09-marketing.md` for a campaign, `teams/05-qa-quality.md` for a bug, etc.).
 
 ## Setup (one-time)
 

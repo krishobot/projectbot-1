@@ -106,7 +106,90 @@ export default function MarketingHome() {
         </div>
       </section>
 
-      {/* HOW IT'S BUILT — credit + four rules */}
+      {/* HOW IT'S USED — two illustrative end-to-end walkthroughs */}
+      <section className="max-w-5xl mx-auto px-6 py-20 border-t border-zinc-900">
+        <div className="mb-8">
+          <p className="text-xs font-mono uppercase tracking-wider text-zinc-500">
+            What it looks like end-to-end
+          </p>
+          <p className="text-sm text-zinc-500 mt-2 max-w-2xl">
+            Two illustrative walkthroughs of a single human running the whole company. Names and numbers are scaffolding to make the workflow concrete — not customer testimonials.
+          </p>
+        </div>
+        <div className="space-y-16">
+          <Story
+            persona="Maya — solo founder, B2B dev tool"
+            tagline="Shipped v0.3 of a code-review SaaS in 19 days, working alone"
+            chapters={[
+              {
+                day: "Day 1",
+                team: "Executive (01)",
+                action: "/office-hours",
+                body: "Six forcing questions. The wedge tightened from 'AI code review' to 'PR-comment review for one-engineer GitHub repos.' Output landed at brain/plans/2026-04-09-mvp.md. The plan named the desperate-specificity user, ruled out 4 adjacent ideas, and set a 14-day shipping bar.",
+              },
+              {
+                day: "Day 2",
+                team: "Engineering (03)",
+                action: "/plan-eng-review",
+                body: "Architecture lock-in. Caught a structural bug: the original plan tried to run inference per-comment; the review forced a per-PR batched call. Result: 3x cost reduction before a line was written. Decision lives at brain/decisions/2026-04-10-batch-inference.md.",
+              },
+              {
+                day: "Days 3 to 12",
+                team: "Engineering + Design + QA",
+                action: "build, /design-review, /qa, repeat",
+                body: "Ten work-days. Three rounds of design review caught a generic-card-grid AI-slop pattern in the dashboard early. /qa walked the live site, filed 11 bugs, fixed 7 in the loop, deferred 4 to TODOS.md.",
+              },
+              {
+                day: "Day 13",
+                team: "Security (08)",
+                action: "/cso",
+                body: "Auth + GitHub-token storage audit. Two P1 findings — webhook secret in plain logs, OAuth redirect not allowlisting subdomains. Both fixed before /ship.",
+              },
+              {
+                day: "Day 14",
+                team: "Release (06)",
+                action: "/ship → /land-and-deploy",
+                body: "PR opened, CI green in 4 minutes, /canary watched the production dashboard for an hour, /document-release wrote brain/changelog/2026-04-22-v0.3.md. The first paid user signed up the next morning.",
+              },
+            ]}
+            outcome="19 days from blank repo to paid v0.3. 47 brain pages written. Zero meetings, because there was nobody else."
+          />
+
+          <Story
+            persona="Devraj — content-led indie hacker, newsletter + sponsorships"
+            tagline="50K newsletter subscribers and 3 sponsor deals closed from one human"
+            chapters={[
+              {
+                day: "Morning, every weekday",
+                team: "Customer Success (11)",
+                action: "daily-task-prep + briefing",
+                body: "8:00 AM. brain/briefings/{today}.md compiles overnight signals, today's calendar, replies needed on yesterday's posts, and any deals at follow-up touch. Devraj reads it with coffee; flags two posts to ship and one sponsor reply to draft.",
+              },
+              {
+                day: "Late morning",
+                team: "Marketing (09)",
+                action: "signal-detector + publish --draft",
+                body: "signal-detector ran overnight on Hacker News, X, and a curated RSS list. Six fresh signals filed at brain/marketing/signals/{today}.md. Two become tweets, one becomes a newsletter section. Drafts land at brain/marketing/content/{today}.md. Devraj edits + sends.",
+              },
+              {
+                day: "Afternoon",
+                team: "Sales / BD (10)",
+                action: "/enrich + brain-ops",
+                body: "A potential sponsor replied. /enrich pulls every prior touchpoint from brain/people/{handle}.md, every meeting from brain/meetings/, every email transcript already filed. The full deal context fits on one page. Devraj writes the reply in 12 minutes. Deal page updated at brain/deals/2026-04-22-acme-newsletter.md.",
+              },
+              {
+                day: "End of week",
+                team: "Executive (01)",
+                action: "/retro",
+                body: "Friday afternoon. /retro reads the week's commits, posts that shipped, deals advanced, and writes brain/retros/wk-17.md. Surfaces one pattern Devraj missed: replies to a specific kind of comment converted at 3x. Next week's content plan adapts.",
+              },
+            ]}
+            outcome="The audience is one human's; the work is 13 teams'. Newsletter went from 9K to 50K in 7 months. Three sponsor deals closed without a CRM, a Notion, or a cold-email tool — all of it lived in the brain."
+          />
+        </div>
+      </section>
+
+      {/* THE FOUR RULES */}
       <section className="max-w-5xl mx-auto px-6 py-20 border-t border-zinc-900">
         <p className="text-xs font-mono uppercase tracking-wider text-zinc-500 mb-6">
           The four rules every team follows
@@ -167,5 +250,59 @@ function Rule({ title, body }: { title: string; body: string }) {
       <h3 className="text-base font-semibold tracking-tight text-zinc-100">{title}</h3>
       <p className="text-sm text-zinc-500 mt-2 leading-relaxed">{body}</p>
     </div>
+  );
+}
+
+type StoryChapter = { day: string; team: string; action: string; body: string };
+
+function Story({
+  persona,
+  tagline,
+  chapters,
+  outcome,
+}: {
+  persona: string;
+  tagline: string;
+  chapters: StoryChapter[];
+  outcome: string;
+}) {
+  return (
+    <article className="grid gap-10 lg:grid-cols-[1fr_2fr]">
+      <header className="lg:sticky lg:top-24 lg:self-start">
+        <p className="text-[11px] font-mono uppercase tracking-wider text-emerald-400/80">
+          {persona}
+        </p>
+        <h3 className="text-2xl font-semibold tracking-tight text-zinc-100 mt-3 leading-snug">
+          {tagline}
+        </h3>
+      </header>
+      <div>
+        <ol className="space-y-5 border-l border-zinc-800">
+          {chapters.map((c, i) => (
+            <li key={i} className="pl-6 -ml-px relative">
+              <span
+                className="absolute left-0 top-1.5 w-2 h-2 rounded-full bg-zinc-800 -translate-x-1/2 ring-4 ring-zinc-950"
+                aria-hidden
+              />
+              <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                <span className="text-[11px] font-mono uppercase tracking-wider text-zinc-500">
+                  {c.day}
+                </span>
+                <span className="text-xs text-zinc-600">·</span>
+                <span className="text-xs font-mono text-emerald-400/80">{c.team}</span>
+                <span className="text-xs text-zinc-600">·</span>
+                <code className="text-xs font-mono text-zinc-300 bg-zinc-900/60 border border-zinc-800 px-1.5 py-0.5 rounded">
+                  {c.action}
+                </code>
+              </div>
+              <p className="text-sm text-zinc-400 leading-relaxed mt-2">{c.body}</p>
+            </li>
+          ))}
+        </ol>
+        <p className="mt-8 pl-6 -ml-px border-l-2 border-emerald-500/40 text-sm text-zinc-300 leading-relaxed italic">
+          {outcome}
+        </p>
+      </div>
+    </article>
   );
 }
