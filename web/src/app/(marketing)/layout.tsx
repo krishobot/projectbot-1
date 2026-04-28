@@ -21,6 +21,12 @@ export default async function MarketingLayout({ children }: { children: React.Re
             </div>
           </Link>
           <nav className="flex items-center gap-1 text-sm">
+            <Link
+              href="/packs"
+              className="text-zinc-400 hover:text-zinc-100 transition px-3 py-3 -my-1"
+            >
+              Packs
+            </Link>
             <a
               href="https://github.com/krishobot/projectbot-1/blob/main/MANUAL.md"
               target="_blank"

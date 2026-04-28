@@ -1,5 +1,12 @@
 # Hosted tbrain — architecture sketch
 
+> **status: ARCHIVED (2026-04-28).** Deferred per CEO review on the same day —
+> packs-only path was chosen as the v1 monetization strategy. This spec is
+> preserved for v2.0 reconsideration if pack signal demands recurring
+> infrastructure. See
+> `~/.gstack/projects/krishobot-projectbot-1/ceo-plans/2026-04-28-packs-only-monetization.md`
+> for the decision context.
+
 The recurring-revenue moat for astack. Build-it-from-this technical spec.
 
 ---

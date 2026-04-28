@@ -1,6 +1,8 @@
-# growth-pack — Gumroad listing
+# growth-pack — astack.dev/packs landing page copy
 
-Paste-ready copy for the first paid skill pack. Targeting solo content-led founders ($99 lifetime). Built from real OnlyKrida workflow.
+Paste-ready copy for the first paid skill pack. Per the 2026-04-28 CEO review, this is the **flagship** in a tiered catalog: $499 USD / ₹19,999 INR for growth-pack, with two specialty packs at $149 / ₹5,999 and a bundle at $899 / ₹34,999. Sold from astack.dev/packs (own funnel, dual checkout via Razorpay for India + Stripe for international).
+
+Targeting solo content-led founders. Built from the OnlyKrida workflow.
 
 ---
 
@@ -10,7 +12,7 @@ Paste-ready copy for the first paid skill pack. Targeting solo content-led found
 
 ### Three teams, fifty skills, zero hires. Tuned for content-led founders who refuse to drop content into a Notion they'll never read again.
 
-[ **Buy — $99 lifetime** ]    [ See what's inside ↓ ]
+[ **Buy growth-pack — $499 / ₹19,999** ]    [ See the bundle (all 3 packs, $899) ↓ ]
 
 ---
 
@@ -111,17 +113,28 @@ To keep this honest:
 
 ## Pricing
 
-**$99 lifetime.** One human. Use it for as many of your projects as you want.
+### growth-pack (flagship)
+**$499 USD / ₹19,999 INR.** One human. Lifetime access to v1.x.
 
 Includes:
 - The pack files above (forever yours)
 - The 22-min walkthrough video
-- 30 days of email Q&A while you set it up
+- **12 months of buyer-only Discord access** (community of solo founders running the same playbook)
+- **Monthly Anirudh office hours** (live Zoom, 4th Wednesday) — bring questions, get unstuck, watch other founders work through theirs
 - All v1.x updates
 
-Does NOT include:
-- Hosted tbrain SaaS (separate $15/mo if you want cross-device brain sync — local PGLite is free forever)
-- 1:1 setup help (separate $2,500 if you want me to install + tune it for you)
+### Specialty packs (coming soon)
+**$149 / ₹5,999** each. Two more packs orbiting the flagship: `agency-pack` (for client shops) and `technical-founder-pack` (for solo SaaS builders). Same Discord, same office hours.
+
+### Bundle (the founder OS)
+**$899 / ₹34,999.** All three packs + community + office hours. Best value if you straddle two niches.
+
+### Custom-tune (high-margin upsell)
+**$2,500 / ₹99,999** per pack. 60-min call + 7 days of pack tuning to your exact ICP and voice + custom brain-page templates. Capped at 10 engagements/month so you actually get my time. Available alongside any pack purchase.
+
+### What's NOT in the price
+- Hosted SaaS — astack runs on your machine. Period. (Local PGLite is free forever.)
+- API costs — your Claude / OpenAI key is yours.
 
 ---
 
@@ -155,10 +168,13 @@ A: Yes — your own. Claude Code or Antigravity calls your model with your key. 
 A: Yes. The pack is a config overlay. Drop it in `astack/packs/growth/` and run `astack install-pack growth`. Detailed install steps in the walkthrough video.
 
 **Q: I bought it. How do I get the next pack at a discount?**
-A: Buyers of growth-pack get **40% off** the next two packs (agency-pack, technical-founder-pack) when they ship in Q2-Q3. Discount code arrives by email when each pack lands.
+A: Buyers of growth-pack get **40% off** the specialty packs (agency-pack, technical-founder-pack) when they ship. Discount code arrives by email automatically. Or buy the bundle now for $899 / ₹34,999 — locks in all three packs at the best price even before the specialty packs land.
+
+**Q: Can I pay in INR via UPI?**
+A: Yes. Indian buyers see Razorpay Checkout with UPI / cards / netbanking by default. International buyers see Stripe Checkout in USD. Switch currency anytime via the toggle on the pricing page.
 
 **Q: What if I'm not technical enough to install?**
-A: Add the $2,500 setup option at checkout. I install + configure it on your machine over a 60-min Zoom + 7 days of follow-up email. Or follow the walkthrough video — most buyers do it in 30 min.
+A: Add the **Custom-tune** option at checkout ($2,500 / ₹99,999). I install + configure it on your machine over a 60-min Zoom + 7 days of pack-tuning to your exact ICP and voice. Or just follow the walkthrough video — most buyers do it in 30 min.
 
 ---
 
