@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { headers } from "next/headers";
-import { getPack, getAllPacks } from "@/lib/packs";
+import { getPack, getAllPacks, getLivePacks } from "@/lib/packs";
 import { CurrencyProvider, CurrencyToggle } from "../CurrencyToggle";
 import { Price } from "../Price";
 
@@ -25,6 +25,9 @@ export default async function PackLandingPage({ params }: Props) {
   if (!pack) notFound();
   const initialCurrency = await detectInitialCurrency();
   const isComingSoon = pack.status === "coming-soon";
+  const hasPrice = !!pack.price;
+  const liveBundle = getLivePacks().find((p) => p.tier === "bundle");
+  const showBundleCTA = liveBundle && liveBundle.id !== pack.id;
 
   return (
     <CurrencyProvider initialCurrency={initialCurrency}>
@@ -52,11 +55,17 @@ export default async function PackLandingPage({ params }: Props) {
           <p className="mt-4 text-zinc-400 leading-relaxed max-w-2xl">{pack.description}</p>
 
           <div className="mt-8 flex items-center gap-4 flex-wrap">
-            <Price price={pack.price} className="text-3xl font-semibold text-zinc-100" />
-            {pack.tier !== "bundle" && (
+            {hasPrice ? (
+              <Price price={pack.price!} className="text-3xl font-semibold text-zinc-100" />
+            ) : (
+              <span className="text-2xl font-semibold text-zinc-500 font-mono tracking-tight">
+                Pricing TBD
+              </span>
+            )}
+            {hasPrice && pack.tier !== "bundle" && (
               <span className="text-sm text-zinc-500">lifetime · v1.x updates</span>
             )}
-            <CurrencyToggle className="ml-auto" />
+            {hasPrice && <CurrencyToggle className="ml-auto" />}
           </div>
 
           <div className="mt-8 flex flex-wrap gap-3">
@@ -70,12 +79,14 @@ export default async function PackLandingPage({ params }: Props) {
             ) : (
               <BuyButton packId={pack.id} />
             )}
-            <Link
-              href="/packs"
-              className="rounded-lg border border-zinc-800 hover:border-zinc-700 hover:bg-zinc-900/50 text-zinc-200 px-5 py-3 text-sm font-medium transition"
-            >
-              See bundle ($899)
-            </Link>
+            {showBundleCTA && liveBundle && (
+              <Link
+                href={`/packs/${liveBundle.id}`}
+                className="rounded-lg border border-zinc-800 hover:border-zinc-700 hover:bg-zinc-900/50 text-zinc-200 px-5 py-3 text-sm font-medium transition"
+              >
+                See bundle ({liveBundle.price ? `$${liveBundle.price.usd}` : "TBD"})
+              </Link>
+            )}
           </div>
         </header>
 
@@ -170,9 +181,11 @@ function BuyButton({ packId, large = false }: { packId: string; large?: boolean 
   const cls = large
     ? "rounded-lg bg-emerald-500 hover:bg-emerald-400 text-zinc-950 px-6 py-3.5 text-base font-semibold transition inline-block"
     : "rounded-lg bg-emerald-500 hover:bg-emerald-400 text-zinc-950 px-5 py-3 text-sm font-semibold transition";
+  const label =
+    packId === "specialty-bundle" || packId === "founder-os" ? "the bundle" : packId;
   return (
     <Link href={`/packs/${packId}/install?demo=1`} className={cls}>
-      Buy {packId === "founder-os" ? "the bundle" : packId} →
+      Buy {label} →
     </Link>
   );
 }

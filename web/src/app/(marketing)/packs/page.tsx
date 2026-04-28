@@ -1,13 +1,12 @@
 import Link from "next/link";
 import { headers } from "next/headers";
-import { PACKS, BUNDLE, type Pack } from "@/lib/packs";
+import { getLivePacks, getComingSoonPacks, type Pack } from "@/lib/packs";
 import { CurrencyProvider, CurrencyToggle } from "./CurrencyToggle";
 import { Price } from "./Price";
 
 export const dynamic = "force-dynamic";
 
 // Geo-detect default currency. Indian visitors default to INR; everyone else to USD.
-// User can flip via the toggle; their choice persists in localStorage.
 async function detectInitialCurrency(): Promise<"usd" | "inr"> {
   const h = await headers();
   const country = h.get("cf-ipcountry") ?? h.get("x-vercel-ip-country") ?? "";
@@ -16,6 +15,12 @@ async function detectInitialCurrency(): Promise<"usd" | "inr"> {
 
 export default async function PacksCatalogPage() {
   const initialCurrency = await detectInitialCurrency();
+  const livePacks = getLivePacks();
+  const comingSoonPacks = getComingSoonPacks();
+
+  // Live layout: 2 specialty packs side by side, bundle full-width below
+  const liveSpecialty = livePacks.filter((p) => p.tier === "specialty");
+  const liveBundle = livePacks.find((p) => p.tier === "bundle");
 
   return (
     <CurrencyProvider initialCurrency={initialCurrency}>
@@ -39,18 +44,34 @@ export default async function PacksCatalogPage() {
           </div>
         </header>
 
-        {/* Flagship + bundle row */}
-        <section className="grid gap-5 lg:grid-cols-3 mb-5">
-          <PackCard pack={PACKS[0]} primary />
-          <PackCard pack={BUNDLE} bundle />
+        {/* AVAILABLE NOW */}
+        <section className="mb-20">
+          <p className="text-xs font-mono uppercase tracking-wider text-emerald-400/80 mb-6 inline-flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" aria-hidden />
+            Available now
+          </p>
+          <div className="grid gap-5 sm:grid-cols-2 mb-5">
+            {liveSpecialty.map((p) => (
+              <PackCard key={p.id} pack={p} />
+            ))}
+          </div>
+          {liveBundle && <PackCard pack={liveBundle} bundle />}
         </section>
 
-        {/* Specialty row */}
-        <section className="grid gap-5 sm:grid-cols-2">
-          {PACKS.slice(1).map((p) => (
-            <PackCard key={p.id} pack={p} />
-          ))}
-        </section>
+        {/* COMING SOON */}
+        {comingSoonPacks.length > 0 && (
+          <section>
+            <p className="text-xs font-mono uppercase tracking-wider text-amber-500/80 mb-6 inline-flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-amber-500" aria-hidden />
+              Coming soon
+            </p>
+            <div className="grid gap-5 sm:grid-cols-2">
+              {comingSoonPacks.map((p) => (
+                <PackCard key={p.id} pack={p} />
+              ))}
+            </div>
+          </section>
+        )}
 
         {/* What every pack includes */}
         <section className="mt-20 border-t border-zinc-900 pt-16">
@@ -71,8 +92,8 @@ export default async function PacksCatalogPage() {
               body="4th Wednesday of each month, 60 minutes on Zoom. Bring questions, watch other founders work through theirs. Capped at 50 buyers per call so you actually get time."
             />
             <Feature
-              title="Custom-tune upsell available."
-              body="Want the pack tuned to your exact niche, voice, and ICP? Add Custom-tune at checkout — 60-min call + 7 days of pack tuning + custom brain-page templates. Capped at 10 / month."
+              title="Dual checkout — UPI or card."
+              body="Indian buyers: Razorpay (UPI / cards / netbanking) in INR. Everywhere else: Stripe (cards) in USD. Switch currency anytime via the toggle above."
             />
           </div>
         </section>
@@ -90,9 +111,8 @@ export default async function PacksCatalogPage() {
           <div>
             <p className="text-zinc-300 font-semibold mb-2">Refunds</p>
             <p className="leading-relaxed">
-              48 hours, no questions asked. After that, you&apos;ve seen the goods. India
-              buyers: refunds processed via Razorpay back to source. Everyone else: Stripe
-              back to source.
+              48 hours, no questions asked, refund processed back to source. After that,
+              you&apos;ve seen the goods.
             </p>
           </div>
         </section>
@@ -101,41 +121,29 @@ export default async function PacksCatalogPage() {
   );
 }
 
-function PackCard({
-  pack,
-  primary,
-  bundle,
-}: {
-  pack: Pack;
-  primary?: boolean;
-  bundle?: boolean;
-}) {
+function PackCard({ pack, bundle }: { pack: Pack; bundle?: boolean }) {
   const isLive = pack.status === "live";
-  const tagBg = bundle
-    ? "border-emerald-900/60 bg-emerald-950/30"
-    : primary
-      ? "border-zinc-800 bg-zinc-900/50"
-      : "border-zinc-900 bg-zinc-950/40";
-  const tagLabel = bundle
-    ? "Bundle"
-    : primary
-      ? "Flagship"
-      : pack.tier === "specialty"
-        ? "Specialty"
-        : "Pack";
-  const tagColor = bundle
-    ? "text-emerald-400"
-    : primary
-      ? "text-zinc-300"
-      : "text-zinc-500";
+  const isBundle = pack.tier === "bundle" || bundle;
+  const hasPrice = !!pack.price;
 
-  // Bundle takes 2 cols on lg, flagship takes 2 cols on lg, specialty 1
-  const colSpan = primary ? "lg:col-span-2" : bundle ? "lg:col-span-1" : "";
+  const tagBg = isBundle
+    ? isLive
+      ? "border-emerald-900/60 bg-emerald-950/30"
+      : "border-zinc-800/60 bg-zinc-950/40"
+    : isLive
+      ? "border-zinc-800 bg-zinc-900/40"
+      : "border-zinc-900 bg-zinc-950/40 opacity-80";
+
+  const tagLabel =
+    pack.tier === "flagship" ? "Flagship" : pack.tier === "bundle" ? "Bundle" : "Specialty";
+  const tagColor = isBundle
+    ? isLive
+      ? "text-emerald-400"
+      : "text-zinc-500"
+    : "text-zinc-500";
 
   return (
-    <div
-      className={`rounded-xl border p-6 flex flex-col ${tagBg} ${colSpan} relative`}
-    >
+    <div className={`rounded-xl border p-6 flex flex-col ${tagBg} relative`}>
       <div className="flex items-baseline justify-between gap-3 mb-3">
         <p className={`text-[10px] font-mono uppercase tracking-wider ${tagColor}`}>
           {tagLabel}
@@ -152,19 +160,33 @@ function PackCard({
       <p className="text-sm text-zinc-400 mt-2 leading-relaxed">{pack.tagline}</p>
 
       <div className="mt-5 mb-5">
-        <Price price={pack.price} className="text-3xl font-semibold text-zinc-100" />
-        {pack.tier !== "bundle" && (
-          <span className="text-xs text-zinc-500 ml-2">lifetime · v1.x updates</span>
+        {hasPrice ? (
+          <>
+            <Price price={pack.price!} className="text-3xl font-semibold text-zinc-100" />
+            {!isBundle && (
+              <span className="text-xs text-zinc-500 ml-2">lifetime · v1.x updates</span>
+            )}
+            {isBundle && pack.bundleOf && (
+              <span className="text-xs text-emerald-500/80 ml-2">{pack.bundleOf.length} packs</span>
+            )}
+          </>
+        ) : (
+          <span className="text-2xl font-semibold text-zinc-500 font-mono tracking-tight">
+            Pricing TBD
+          </span>
         )}
       </div>
 
       <ul className="space-y-2 text-sm text-zinc-300 leading-relaxed mb-6 flex-1">
-        {pack.highlights.slice(0, primary || bundle ? 6 : 4).map((h) => (
+        {pack.highlights.slice(0, isBundle ? 5 : 4).map((h) => (
           <li key={h} className="flex gap-2">
-            <span className="text-emerald-500/80 mt-0.5" aria-hidden>
+            <span
+              className={`mt-0.5 ${isLive ? "text-emerald-500/80" : "text-zinc-700"}`}
+              aria-hidden
+            >
               ✓
             </span>
-            <span>{h}</span>
+            <span className={isLive ? "" : "text-zinc-500"}>{h}</span>
           </li>
         ))}
       </ul>
@@ -177,7 +199,7 @@ function PackCard({
           See {pack.name} →
         </Link>
       ) : (
-        <div className="rounded-lg border border-zinc-800 px-4 py-2.5 text-sm text-zinc-500 text-center">
+        <div className="rounded-lg border border-zinc-800 px-4 py-2.5 text-xs text-zinc-500 text-center font-mono">
           {pack.shipping ?? "Coming soon"}
         </div>
       )}
