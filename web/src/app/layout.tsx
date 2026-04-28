@@ -17,7 +17,7 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "astack — the agent workspace for shipping a company by yourself",
   description:
-    "13 specialised AI teams wired into a persistent markdown brain. Run on top of Garry Tan's GStack and GBrain.",
+    "13 specialised AI teams wired into a persistent markdown brain. Open source, MIT.",
 };
 
 // Root layout is intentionally chrome-free. Marketing routes get a marketing
