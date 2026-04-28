@@ -3,7 +3,7 @@
  * astack desktop companion
  *
  * Local daemon at 127.0.0.1:7331. Bridges the SaaS web console to the user's
- * machine: brain access via gbrain CLI, terminal launching, MCP auto-wiring.
+ * machine: brain access via the tbrain CLI, terminal launching, MCP auto-wiring.
  *
  * Security: bound to localhost, bearer-token auth, every state-changing
  * endpoint backs up before write.

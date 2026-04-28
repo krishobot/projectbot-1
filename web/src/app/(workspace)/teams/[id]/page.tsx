@@ -57,7 +57,7 @@ export default async function TeamPage({ params }: Props) {
       </section>
 
       <section className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <SkillsCard label="GStack skills" skills={team.gstackSkills} colorClass="text-cyan-400" />
+        <SkillsCard label="astack skills" skills={team.astackSkills} colorClass="text-cyan-400" />
         <SkillsCard label="tbrain skills" skills={team.tbrainSkills} colorClass="text-emerald-400" />
       </section>
 

@@ -6,11 +6,11 @@
 
 | Skill | Source | What it does |
 |---|---|---|
-| `brain-ops` | gbrain | The core read-enrich-write loop. Every entity touch goes through this skill. |
-| `enrich` | gbrain | Global enrichment: entity slugs, tier auto-escalation, batched throttling. Turns "@some-handle" into a full person page. |
-| `query` | gbrain | Hybrid search (vector + keyword + RRF) over the brain. "Who have we already messaged at fund-a?" |
-| `data-research` | gbrain | Structured data research: email-to-tracker pipeline with parameterized YAML recipes. |
-| `meeting-ingestion` | gbrain | Ingest transcripts; chains attendee enrichment so people-pages auto-update after every call. |
+| `brain-ops` | tbrain | The core read-enrich-write loop. Every entity touch goes through this skill. |
+| `enrich` | tbrain | Global enrichment: entity slugs, tier auto-escalation, batched throttling. Turns "@some-handle" into a full person page. |
+| `query` | tbrain | Hybrid search (vector + keyword + RRF) over the brain. "Who have we already messaged at fund-a?" |
+| `data-research` | tbrain | Structured data research: email-to-tracker pipeline with parameterized YAML recipes. |
+| `meeting-ingestion` | tbrain | Ingest transcripts; chains attendee enrichment so people-pages auto-update after every call. |
 
 ## When to invoke this team
 

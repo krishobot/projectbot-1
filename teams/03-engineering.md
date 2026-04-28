@@ -6,14 +6,14 @@
 
 | Skill | Source | What it does |
 |---|---|---|
-| `/plan-eng-review` | gstack | Lock architecture, data flow, edge cases, and tests before writing code. |
-| `/pair-agent` | gstack | Pair-programming agent — long-running implementation companion. |
-| `/codex` | gstack | Multi-AI second opinion via OpenAI Codex CLI. Use when stuck or before risky changes. |
-| `/investigate` | gstack | Systematic root-cause debugging. No fixes without an investigation first. |
-| `/learn` | gstack | Learn mode — explain the code as you change it. |
-| `/make-pdf` | gstack | Generate PDFs (rare; for technical docs). |
-| `skill-creator` | gbrain | Create new agent skills with MECE check. |
-| `skillify` | gbrain | Markdown orchestration for new skills + scaffolds + checks. |
+| `/plan-eng-review` | astack | Lock architecture, data flow, edge cases, and tests before writing code. |
+| `/pair-agent` | astack | Pair-programming agent — long-running implementation companion. |
+| `/codex` | astack | Multi-AI second opinion via OpenAI Codex CLI. Use when stuck or before risky changes. |
+| `/investigate` | astack | Systematic root-cause debugging. No fixes without an investigation first. |
+| `/learn` | astack | Learn mode — explain the code as you change it. |
+| `/make-pdf` | astack | Generate PDFs (rare; for technical docs). |
+| `skill-creator` | tbrain | Create new agent skills with MECE check. |
+| `skillify` | tbrain | Markdown orchestration for new skills + scaffolds + checks. |
 
 ## When to invoke this team
 

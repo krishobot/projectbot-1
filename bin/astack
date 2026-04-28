@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# astack — astack's role/skill CLI.
+# Thin wrapper that dispatches to the underlying skill-runner binary on disk.
+exec gstack "$@"

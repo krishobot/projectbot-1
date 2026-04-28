@@ -7,7 +7,7 @@ export const dynamic = "force-dynamic";
 const SNIPPET = `{
   "mcpServers": {
     "tbrain": {
-      "command": "gbrain",
+      "command": "tbrain",
       "args": ["mcp"]
     }
   }
@@ -23,7 +23,7 @@ export default async function McpSetupPage() {
         <Link href="/" className="text-xs text-zinc-500 hover:text-zinc-300 transition">← back home</Link>
         <h1 className="text-3xl font-semibold tracking-tight mt-3">Connect your Claude to tbrain</h1>
         <p className="text-zinc-400 mt-3 leading-relaxed">
-          tbrain ships an MCP server (gbrain&apos;s under the hood). Point your Claude Desktop or Claude Code at it and every chat reads and writes the same brain your astack agents do — same people, same companies, same deals, same memory.
+          tbrain ships an MCP server. Point your Claude Desktop or Claude Code at it and every chat reads and writes the same brain your astack agents do — same people, same companies, same deals, same memory.
         </p>
       </div>
 
@@ -64,7 +64,7 @@ function DaemonStatus({ health }: { health: Awaited<ReturnType<typeof getDesktop
     <section className="rounded-xl border border-emerald-900/40 bg-emerald-950/20 p-5">
       <div className="text-[11px] font-mono uppercase tracking-wide text-emerald-400 mb-2">desktop companion connected</div>
       <div className="text-sm text-emerald-100/80 font-mono">
-        v{health.version} · {health.platform}/{health.arch} · gbrain {health.gbrain.available ? `✓ ${health.gbrain.version ?? ""}` : "✗ not found in PATH"}
+        v{health.version} · {health.platform}/{health.arch} · tbrain {health.tbrain.available ? `✓ ${health.tbrain.version ?? ""}` : "✗ not found in PATH"}
       </div>
     </section>
   );

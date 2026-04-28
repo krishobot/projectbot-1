@@ -6,16 +6,16 @@
 
 | Skill | Source | What it does |
 |---|---|---|
-| `/ship` | gstack | Run tests, review, push, open PR. One command. The single canonical way to ship. |
-| `/land-and-deploy` | gstack | Merge → deploy → canary verify in one pipeline. |
-| `/canary` | gstack | Post-deploy monitoring loop — watches metrics + errors after a release. |
-| `/landing-report` | gstack | Post-landing report: what shipped, what moved, what regressed. |
-| `/document-release` | gstack | Update every `.md` to match what just shipped. **Mandatory after every `/ship`.** |
-| `/setup-deploy` | gstack | One-time deploy config. |
-| `/supabase` | gstack | Supabase ops (migrations, RLS, project admin). |
-| `/gstack-upgrade` | gstack | Update gstack itself to the latest version. |
-| `migrate` | gbrain | Universal migration: Obsidian, Notion, Logseq, markdown, CSV, JSON, Roam. |
-| `publish` | gbrain | Share brain pages as password-protected HTML — zero LLM calls. |
+| `/ship` | astack | Run tests, review, push, open PR. One command. The single canonical way to ship. |
+| `/land-and-deploy` | astack | Merge → deploy → canary verify in one pipeline. |
+| `/canary` | astack | Post-deploy monitoring loop — watches metrics + errors after a release. |
+| `/landing-report` | astack | Post-landing report: what shipped, what moved, what regressed. |
+| `/document-release` | astack | Update every `.md` to match what just shipped. **Mandatory after every `/ship`.** |
+| `/setup-deploy` | astack | One-time deploy config. |
+| `/supabase` | astack | Supabase ops (migrations, RLS, project admin). |
+| `/astack-upgrade` | astack | Update astack itself to the latest version. |
+| `migrate` | tbrain | Universal migration: Obsidian, Notion, Logseq, markdown, CSV, JSON, Roam. |
+| `publish` | tbrain | Share brain pages as password-protected HTML — zero LLM calls. |
 
 ## When to invoke this team
 

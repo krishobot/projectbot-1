@@ -6,14 +6,14 @@
 
 | Skill | Source | What it does |
 |---|---|---|
-| `/office-hours` | gstack | YC Office Hours — startup diagnostic + builder brainstorm. Always start here for a new idea. |
-| `/plan-ceo-review` | gstack | "Find the 10-star product in the request." Ruthless scope review before eng or design start. |
-| `/plan-tune` | gstack | Tune an existing plan — what's missing, what's overbuilt. |
-| `/autoplan` | gstack | Auto pipeline: CEO → design → eng review in one pass. |
-| `/retro` | gstack | Weekly retro across all projects. Per-person breakdown, shipping streaks. |
-| `briefing` | gbrain | Compile daily briefing: meetings today, active deals, citations to read. |
-| `daily-task-prep` | gbrain | Morning prep with calendar context. |
-| `soul-audit` | gbrain | 6-phase interview that produces SOUL.md / USER.md / ACCESS_POLICY.md / HEARTBEAT.md — the org's identity files. |
+| `/office-hours` | astack | YC Office Hours — startup diagnostic + builder brainstorm. Always start here for a new idea. |
+| `/plan-ceo-review` | astack | "Find the 10-star product in the request." Ruthless scope review before eng or design start. |
+| `/plan-tune` | astack | Tune an existing plan — what's missing, what's overbuilt. |
+| `/autoplan` | astack | Auto pipeline: CEO → design → eng review in one pass. |
+| `/retro` | astack | Weekly retro across all projects. Per-person breakdown, shipping streaks. |
+| `briefing` | tbrain | Compile daily briefing: meetings today, active deals, citations to read. |
+| `daily-task-prep` | tbrain | Morning prep with calendar context. |
+| `soul-audit` | tbrain | 6-phase interview that produces SOUL.md / USER.md / ACCESS_POLICY.md / HEARTBEAT.md — the org's identity files. |
 
 ## When to invoke this team
 

@@ -13,7 +13,7 @@ The daemon is a small Bun-compiled binary (~25 MB). One-time install. Runs on `1
 | Method | Path                  | What it does |
 |--------|-----------------------|--------------|
 | GET    | `/health`             | Returns `{ok: true, version, platform, brainPath}`. Web console pings this on load. |
-| GET    | `/brain/stats`        | Shells out to `gbrain stats`, returns parsed JSON. |
+| GET    | `/brain/stats`        | Shells out to `tbrain stats` (via the `bin/tbrain` wrapper, with fallback), returns parsed JSON. |
 | GET    | `/teams`              | Reads `../teams/*.md`, returns the manifest list. |
 | POST   | `/launch`             | Body: `{teamId}`. Spawns a terminal with claude/antigravity scoped to that team. |
 | POST   | `/mcp/auto-wire`      | Body: `{client: "claude-desktop"\|"claude-code", server: "tbrain"}`. Backs up the config file, merges in the MCP entry, restarts the client if running. |

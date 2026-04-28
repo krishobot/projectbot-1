@@ -6,11 +6,11 @@
 
 | Skill | Source | What it does |
 |---|---|---|
-| `/design-consultation` | gstack | Build a complete design system from scratch — tokens, components, voice. |
-| `/plan-design-review` | gstack | Rate each design dimension 0–10, explain what a 10 looks like. Pre-implementation gate. |
-| `/design-review` | gstack | Visual audit + atomic-commit fix loop on shipped surfaces. |
-| `/design-shotgun` | gstack | Visual design exploration — many directions in parallel. |
-| `/design-html` | gstack | HTML-tier design output (when fidelity matters more than Figma). |
+| `/design-consultation` | astack | Build a complete design system from scratch — tokens, components, voice. |
+| `/plan-design-review` | astack | Rate each design dimension 0–10, explain what a 10 looks like. Pre-implementation gate. |
+| `/design-review` | astack | Visual audit + atomic-commit fix loop on shipped surfaces. |
+| `/design-shotgun` | astack | Visual design exploration — many directions in parallel. |
+| `/design-html` | astack | HTML-tier design output (when fidelity matters more than Figma). |
 
 ## When to invoke this team
 
@@ -37,4 +37,4 @@
 - `/brain/design/system.md` — living design system reference
 - `/brain/design/reviews/{slug}.md` — per-feature design review
 
-> **Convention:** see [_brain-filing-rules](../gbrain/skills/_brain-filing-rules.md) for full filing rules.
+> **Convention:** see the brain-filing-rules skill in tbrain for the canonical filing rules.

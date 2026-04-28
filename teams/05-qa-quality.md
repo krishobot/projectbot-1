@@ -6,15 +6,15 @@
 
 | Skill | Source | What it does |
 |---|---|---|
-| `/qa` | gstack | Open a real browser, find bugs, fix them, re-verify. End-to-end. |
-| `/qa-only` | gstack | Same as `/qa` but report-only — no code changes. Use for audits / PR-stage checks. |
-| `/browse` | gstack | Headless browser CLI (real Chromium, ~100 ms/command). Foundation of QA + dogfooding. |
-| `/investigate` | gstack | Shared with Engineering — systematic root-cause debugging. |
-| `/benchmark` | gstack | Performance regression detection. |
-| `/benchmark-models` | gstack | Compare model behavior on the same prompt — quality regression detection. |
-| `testing` | gbrain | Skill validation framework — does the skill itself behave? |
-| `smoke-test` | gbrain | 8 post-restart health checks (Bun, CLI, DB, worker, etc.) with auto-fix. |
-| `cross-modal-review` | gbrain | Quality gate via a second model for any text/audio/visual output. |
+| `/qa` | astack | Open a real browser, find bugs, fix them, re-verify. End-to-end. |
+| `/qa-only` | astack | Same as `/qa` but report-only — no code changes. Use for audits / PR-stage checks. |
+| `/browse` | astack | Headless browser CLI (real Chromium, ~100 ms/command). Foundation of QA + dogfooding. |
+| `/investigate` | astack | Shared with Engineering — systematic root-cause debugging. |
+| `/benchmark` | astack | Performance regression detection. |
+| `/benchmark-models` | astack | Compare model behavior on the same prompt — quality regression detection. |
+| `testing` | tbrain | Skill validation framework — does the skill itself behave? |
+| `smoke-test` | tbrain | 8 post-restart health checks (Bun, CLI, DB, worker, etc.) with auto-fix. |
+| `cross-modal-review` | tbrain | Quality gate via a second model for any text/audio/visual output. |
 
 ## When to invoke this team
 

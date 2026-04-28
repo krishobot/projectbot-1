@@ -19,15 +19,15 @@ updated: YYYY-MM-DD
 - **{{Day}} evening** — Executive runs `/retro` across all projects. Output: `brain/retros/wk-NN.md`.
 
 ## Monthly
-- **First {{day}}** — `gbrain doctor` health check + brain-maintenance pass via `maintain`.
-- **First {{day}}** — Data team runs retrieval evals (`gbrain eval`) to catch quality drift.
+- **First {{day}}** — `tbrain doctor` health check + brain-maintenance pass via `maintain`.
+- **First {{day}}** — Data team runs retrieval evals (`tbrain eval`) to catch quality drift.
 - **End of month** — Executive reviews 90-day goals (in `identity/USER.md`) against actuals.
 
 ## Per-event
 - **New product idea** → Executive `/office-hours` first.
 - **Production bug** → QA `/investigate` first (no fixes without diagnosis).
 - **Ready to ship** → Release `/ship` (one canonical command — never hand-roll).
-- **Post-ship, always** → `/document-release` (mandatory, per gstack convention).
+- **Post-ship, always** → `/document-release` (mandatory, per astack convention).
 
 ## Pause / quiet
 - **Founder away ≥ 24 h** → all "drafts → founder approves" gates hard-pause. Agents queue work to `brain/inbox/founder/` and stop.

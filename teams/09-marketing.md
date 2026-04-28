@@ -1,18 +1,18 @@
 # Team 09 — Marketing
 
-**Charter:** owns outbound — content, brand voice, signal capture from the wild. Most of the leverage here lives in GBrain ingest skills: the brain becomes a real-time picture of what the market is saying, and that picture drives what gets posted.
+**Charter:** owns outbound — content, brand voice, signal capture from the wild. Most of the leverage here lives in tbrain's ingest skills: the brain becomes a real-time picture of what the market is saying, and that picture drives what gets posted.
 
 ## Roster
 
 | Skill | Source | What it does |
 |---|---|---|
-| `signal-detector` | gbrain | Always-on. Watches every conversation and incoming feed for new ideas + entities. Files them. |
-| `idea-ingest` | gbrain | Capture links, articles, tweets — auto-creates author people-pages so the brain knows who said what. |
-| `media-ingest` | gbrain | Video, audio, PDF, book ingestion with entity extraction. Use for case studies + competitor analysis. |
-| `publish` | gbrain | Share any brain page as password-protected HTML. Zero LLM calls. Use for one-pagers + landing pages. |
-| `webhook-transforms` | gbrain | Turn external events (Stripe, Apify, GitHub) into brain signals. |
+| `signal-detector` | tbrain | Always-on. Watches every conversation and incoming feed for new ideas + entities. Files them. |
+| `idea-ingest` | tbrain | Capture links, articles, tweets — auto-creates author people-pages so the brain knows who said what. |
+| `media-ingest` | tbrain | Video, audio, PDF, book ingestion with entity extraction. Use for case studies + competitor analysis. |
+| `publish` | tbrain | Share any brain page as password-protected HTML. Zero LLM calls. Use for one-pagers + landing pages. |
+| `webhook-transforms` | tbrain | Turn external events (Stripe, Apify, GitHub) into brain signals. |
 
-> **Note.** GStack itself doesn't ship marketing skills — Tan's framework is engineering-focused. The marketing layer is built on top of GBrain's ingest + publish stack. See `gbrain/skills/idea-ingest/SKILL.md` and `gbrain/skills/publish/SKILL.md` for the canonical prompts.
+> **Note.** astack's role-skill catalog is engineering-focused; the marketing layer lives in tbrain's ingest + publish skills. See the canonical SKILL.md files for `idea-ingest` and `publish` in the tbrain skill repo.
 
 ## When to invoke this team
 

@@ -1,25 +1,23 @@
-# Host configs (additions to GStack)
+# Host configs
 
-GStack ships 10 host configs (`claude`, `codex`, `cursor`, `factory`, `gbrain`, `hermes`, `kiro`, `opencode`, `openclaw`, `slate`). astack adds:
+astack ships host configs for editor / agent integrations. Each host config controls where skill artifacts land and how the skill runner installs them on that platform.
 
-- **`antigravity.ts`** — Google Antigravity, the agentic IDE. Same Cursor-like layout: skill artifacts land in `.antigravity/skills/gstack/`. Suppresses `GBRAIN_*` resolvers in favor of MCP-based brain access.
+## Hosts
 
-## Installing into a fresh gstack clone
+- **`antigravity.ts`** — Google Antigravity, the agentic IDE. Cursor-like layout: skill artifacts land in `.antigravity/skills/astack/`. MCP-based brain access only; suppresses inline brain resolvers.
 
-After `git clone https://github.com/garrytan/gstack`, copy our host configs in and re-run setup:
+## Installing a host config
 
 ```bash
-cp hosts/antigravity.ts gstack/hosts/
-# Add `antigravity` to ALL_HOST_CONFIGS in gstack/hosts/index.ts (one-line edit)
-cd gstack
+cp hosts/antigravity.ts <skill-runner>/hosts/
+# Add `antigravity` to ALL_HOST_CONFIGS in <skill-runner>/hosts/index.ts (one-line edit)
+cd <skill-runner>
 bun install
 ./setup --host antigravity --no-team    # OR keep --host claude as primary
 ```
 
-A small `setup.sh` at the astack root will automate this in v0.2.
+A small `setup.sh` at the astack root automates this.
 
-## Why we maintain a local copy
+## Why this directory exists
 
-The cloned `gstack/` directory is gitignored from this repo (it's an upstream MIT codebase, redistributed via clone-and-patch, not vendored). Storing our antigravity config here means it survives reinstalls of gstack and is reviewable on its own.
-
-If upstream merges Antigravity support, this file becomes redundant and goes away.
+The skill-runner source dir is gitignored from this repo (installed via clone-and-patch, not vendored). Keeping host configs here means they survive reinstalls of the runner and stay reviewable on their own.

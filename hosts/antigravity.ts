@@ -5,8 +5,8 @@ import type { HostConfig } from '../scripts/host-config';
  *
  * Antigravity is Google's agentic IDE. It supports MCP, has a built-in
  * terminal, and runs Gemini by default (with user-configurable model
- * routing). Skill artifacts land under `.antigravity/skills/gstack/` so
- * Antigravity discovers them without conflicting with Claude Code's
+ * routing). astack skill artifacts land under `.antigravity/skills/astack/`
+ * so Antigravity discovers them without conflicting with Claude Code's
  * `.claude/skills/` tree.
  *
  * Modeled on the Cursor host config — both are Cursor-like IDEs with their
@@ -19,8 +19,8 @@ const antigravity: HostConfig = {
   cliCommand: 'antigravity',
   cliAliases: [],
 
-  globalRoot: '.antigravity/skills/gstack',
-  localSkillRoot: '.antigravity/skills/gstack',
+  globalRoot: '.antigravity/skills/astack',
+  localSkillRoot: '.antigravity/skills/astack',
   hostSubdir: '.antigravity',
   usesEnvVars: true,
 
@@ -38,19 +38,19 @@ const antigravity: HostConfig = {
   },
 
   pathRewrites: [
-    { from: '~/.claude/skills/gstack', to: '~/.antigravity/skills/gstack' },
-    { from: '.claude/skills/gstack', to: '.antigravity/skills/gstack' },
+    { from: '~/.claude/skills/astack', to: '~/.antigravity/skills/astack' },
+    { from: '.claude/skills/astack', to: '.antigravity/skills/astack' },
     { from: '.claude/skills', to: '.antigravity/skills' },
   ],
 
-  // Skills that delegate to gbrain for context-load / save expect the
-  // GBRAIN_* resolvers; Antigravity supports gbrain via MCP, but the
+  // Skills that delegate to tbrain for context-load / save expect the
+  // TBRAIN_* resolvers; Antigravity supports tbrain via MCP, but the
   // shorthand resolvers assume Claude Code's filesystem layout. Suppress
-  // them — agents on Antigravity should call gbrain directly via MCP.
-  suppressedResolvers: ['GBRAIN_CONTEXT_LOAD', 'GBRAIN_SAVE_RESULTS'],
+  // them — agents on Antigravity should call tbrain directly via MCP.
+  suppressedResolvers: ['TBRAIN_CONTEXT_LOAD', 'TBRAIN_SAVE_RESULTS'],
 
   runtimeRoot: {
-    globalSymlinks: ['bin', 'browse/dist', 'browse/bin', 'gstack-upgrade', 'ETHOS.md'],
+    globalSymlinks: ['bin', 'browse/dist', 'browse/bin', 'astack-upgrade', 'ETHOS.md'],
     globalFiles: {
       'review': ['checklist.md', 'TODOS-format.md'],
     },

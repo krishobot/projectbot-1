@@ -6,10 +6,10 @@
 
 | Skill | Source | What it does |
 |---|---|---|
-| `daily-task-manager` | gbrain | Task lifecycle with explicit priority levels. The org's todo system, brain-backed. |
-| `daily-task-prep` | gbrain | Morning prep: today's calendar + active tasks + active deals + things on fire. |
-| `briefing` | gbrain | Compile a daily briefing: meeting context, active deals, citation tracking. |
-| `reports` | gbrain | Timestamped reports with keyword routing — audit trail for any ongoing work. |
+| `daily-task-manager` | tbrain | Task lifecycle with explicit priority levels. The org's todo system, brain-backed. |
+| `daily-task-prep` | tbrain | Morning prep: today's calendar + active tasks + active deals + things on fire. |
+| `briefing` | tbrain | Compile a daily briefing: meeting context, active deals, citation tracking. |
+| `reports` | tbrain | Timestamped reports with keyword routing — audit trail for any ongoing work. |
 
 ## When to invoke this team
 

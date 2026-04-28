@@ -23,7 +23,7 @@ function configPath(client: Client): string {
   return path.join(os.homedir(), ".config", "Claude", "claude_desktop_config.json");
 }
 
-const TBRAIN_ENTRY = { command: "gbrain", args: ["mcp"] };
+const TBRAIN_ENTRY = { command: "tbrain", args: ["mcp"] };
 
 export async function handleMcpStatus(_ctx: Ctx) {
   const out: Record<Client, { configFound: boolean; tbrainWired: boolean; path: string }> = {

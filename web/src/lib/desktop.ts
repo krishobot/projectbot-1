@@ -40,7 +40,7 @@ export type DesktopHealth = {
   platform: string;
   arch: string;
   astackRoot: string;
-  gbrain: { available: boolean; version: string | null };
+  tbrain: { available: boolean; version: string | null };
 };
 
 export type McpClientStatus = { configFound: boolean; tbrainWired: boolean; path: string };

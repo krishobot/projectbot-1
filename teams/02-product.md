@@ -6,11 +6,11 @@
 
 | Skill | Source | What it does |
 |---|---|---|
-| `/office-hours` | gstack | Reuse for early-stage feature ideation (this team's main thinking tool). |
-| `/plan-ceo-review` | gstack | Self-review before handing to engineering. |
-| `/plan-tune` | gstack | Refine a draft plan against scope creep. |
-| `idea-ingest` | gbrain | Capture links, articles, tweets into the brain with author people-pages auto-created. |
-| `signal-detector` | gbrain | Always-on. Watches every conversation for new ideas/entities and files them. |
+| `/office-hours` | astack | Reuse for early-stage feature ideation (this team's main thinking tool). |
+| `/plan-ceo-review` | astack | Self-review before handing to engineering. |
+| `/plan-tune` | astack | Refine a draft plan against scope creep. |
+| `idea-ingest` | tbrain | Capture links, articles, tweets into the brain with author people-pages auto-created. |
+| `signal-detector` | tbrain | Always-on. Watches every conversation for new ideas/entities and files them. |
 
 ## When to invoke this team
 

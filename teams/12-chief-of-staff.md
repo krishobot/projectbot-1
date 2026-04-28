@@ -6,16 +6,16 @@
 
 | Skill | Source | What it does |
 |---|---|---|
-| `ingest` | gbrain | Thin router that detects input type and delegates to specialized ingestion skills. |
-| `maintain` | gbrain | Brain maintenance: dedup, link repair, embedding refresh, orphan detection. |
-| `conventions` | gbrain | Cross-cutting rules: quality, brain-first lookup, model routing, test-before-bulk. |
-| `repo-architecture` | gbrain | Filing rules — what page goes where, by primary subject. |
-| `cron-scheduler` | gbrain | Schedule staggering, quiet hours, idempotency for recurring jobs. |
-| `minion-orchestrator` | gbrain | Background-work skill: shell jobs (`gbrain jobs submit shell`) + LLM subagents (`gbrain agent run`). Parent-child DAGs, depth caps, timeouts. |
-| `/context-save` | gstack | Save current Claude Code session context to disk. |
-| `/context-restore` | gstack | Resume from a saved session. |
-| `/retro` | gstack | Shared with Executive — Chief of Staff runs the operational half. |
-| `/health` | gstack | gstack health dashboard. |
+| `ingest` | tbrain | Thin router that detects input type and delegates to specialized ingestion skills. |
+| `maintain` | tbrain | Brain maintenance: dedup, link repair, embedding refresh, orphan detection. |
+| `conventions` | tbrain | Cross-cutting rules: quality, brain-first lookup, model routing, test-before-bulk. |
+| `repo-architecture` | tbrain | Filing rules — what page goes where, by primary subject. |
+| `cron-scheduler` | tbrain | Schedule staggering, quiet hours, idempotency for recurring jobs. |
+| `minion-orchestrator` | tbrain | Background-work skill: shell jobs (`gbrain jobs submit shell`) + LLM subagents (`gbrain agent run`). Parent-child DAGs, depth caps, timeouts. |
+| `/context-save` | astack | Save current Claude Code session context to disk. |
+| `/context-restore` | astack | Resume from a saved session. |
+| `/retro` | astack | Shared with Executive — Chief of Staff runs the operational half. |
+| `/health` | astack | gstack health dashboard. |
 
 ## When to invoke this team
 

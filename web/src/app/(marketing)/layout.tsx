@@ -55,26 +55,7 @@ export default async function MarketingLayout({ children }: { children: React.Re
       <main className="flex-1 w-full">{children}</main>
       <footer className="border-t border-zinc-900 mt-24">
         <div className="max-w-6xl mx-auto px-6 py-8 text-xs text-zinc-500 flex flex-wrap items-center justify-between gap-3">
-          <div>
-            <a
-              href="https://github.com/garrytan/gstack"
-              className="underline decoration-zinc-700 hover:text-zinc-300 hover:decoration-zinc-500"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              GStack
-            </a>{" "}
-            +{" "}
-            <a
-              href="https://github.com/garrytan/gbrain"
-              className="underline decoration-zinc-700 hover:text-zinc-300 hover:decoration-zinc-500"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              GBrain
-            </a>{" "}
-            under the hood (MIT).
-          </div>
+          <div>astack + tbrain — open source, MIT.</div>
           <div className="font-mono">v0.1</div>
         </div>
       </footer>

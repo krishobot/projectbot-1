@@ -78,10 +78,10 @@ export default async function WorkspaceHome() {
             offText="offline · cd desktop && bun run start"
           />
           <StatusRow
-            label="tbrain (gbrain CLI)"
-            ok={!!daemon?.gbrain.available}
-            okText={daemon?.gbrain.version ? `v${daemon.gbrain.version}` : "available"}
-            offText="not on PATH · install gbrain to enable brain access"
+            label="tbrain CLI"
+            ok={!!daemon?.tbrain.available}
+            okText={daemon?.tbrain.version ? `v${daemon.tbrain.version}` : "available"}
+            offText="not on PATH · install tbrain to enable brain access"
           />
         </div>
       </section>

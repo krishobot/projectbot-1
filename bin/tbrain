@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# tbrain — astack's persistent-memory CLI.
+# Thin wrapper that dispatches to the underlying brain binary on disk.
+exec gbrain "$@"

@@ -5,17 +5,19 @@ const VERSION = "0.1.0";
 const isWindows = process.platform === "win32";
 
 export async function handleHealth(ctx: Ctx) {
-  let gbrainOk = false;
-  let gbrainVersion: string | null = null;
-  try {
-    const out = execFileSync(isWindows ? "gbrain.cmd" : "gbrain", ["--version"], {
-      encoding: "utf8",
-      timeout: 4000,
-    });
-    gbrainOk = true;
-    gbrainVersion = out.trim();
-  } catch {
-    /* not installed */
+  let tbrainOk = false;
+  let tbrainVersion: string | null = null;
+  // Try the astack-branded `tbrain` wrapper first; fall back to `gbrain`
+  // for installs that haven't put the wrapper on PATH yet.
+  for (const bin of isWindows ? ["tbrain.cmd", "gbrain.cmd"] : ["tbrain", "gbrain"]) {
+    try {
+      const out = execFileSync(bin, ["--version"], { encoding: "utf8", timeout: 4000 });
+      tbrainOk = true;
+      tbrainVersion = out.trim();
+      break;
+    } catch {
+      /* try next */
+    }
   }
 
   return {
@@ -25,6 +27,6 @@ export async function handleHealth(ctx: Ctx) {
     platform: process.platform,
     arch: process.arch,
     astackRoot: ctx.astackRoot,
-    gbrain: { available: gbrainOk, version: gbrainVersion },
+    tbrain: { available: tbrainOk, version: tbrainVersion },
   };
 }

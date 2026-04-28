@@ -10,7 +10,7 @@ updated: YYYY-MM-DD
 - **{{Founder Name}}** — full read/write across the brain. The only one who can:
   - Post to public channels ({{list channels}}).
   - Send first-touch DMs or emails.
-  - Run `gbrain migrate --to supabase` (data movement).
+  - Run `tbrain migrate --to supabase` (data movement).
   - Approve `/cso`-flagged risk items.
   - Edit `identity/SOUL.md`, `identity/USER.md`, this file, or `identity/HEARTBEAT.md`.
 
@@ -18,8 +18,8 @@ updated: YYYY-MM-DD
 By default agents may:
 - Read every file in `brain/` (with the exceptions listed below).
 - Write to brain pages owned by their team (per `teams/*.md` "Brain pages this team writes" sections).
-- Invoke any GStack or GBrain skill assigned to their team.
-- Run read-only queries (`gbrain query`, `gbrain stats`, `gbrain doctor`).
+- Invoke any astack or tbrain skill assigned to their team.
+- Run read-only queries (`tbrain query`, `tbrain stats`, `tbrain doctor`).
 
 Agents may NOT (without explicit founder approval per session):
 - Push to remote repos (`git push`).
@@ -28,14 +28,13 @@ Agents may NOT (without explicit founder approval per session):
 - Send anything to a real person — DM, email, or webhook payload to an external endpoint.
 - Run `/ship`, `/land-and-deploy`, or any deploy-tier skill.
 - Add a new MCP server or external integration.
-- Modify `~/.gbrain/config.json` or `~/.claude/settings.json`.
+- Modify the tbrain config or `~/.claude/settings.json`.
 
 ## Trust boundary
-Inherited from GBrain (`gbrain/CLAUDE.md`):
 - Local CLI calls (`OperationContext.remote = false`) are trusted.
 - MCP / agent-facing calls (`remote = true`) are untrusted — security-sensitive operations like `file_upload` tighten filesystem confinement.
 
-## Privacy rule (inherited from gbrain)
+## Privacy rule
 Never commit real names of people, companies, or funds into public artifacts (CHANGELOG.md, README.md, public PRs, blog posts). Use placeholders: `alice-example`, `acme-example`, `fund-a`. Real names live only inside `brain/` (private) and the consumer-facing product.
 
 ## Escalation

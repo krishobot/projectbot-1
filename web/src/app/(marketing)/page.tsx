@@ -5,7 +5,7 @@ export const dynamic = "force-dynamic";
 
 export default function MarketingHome() {
   const teams = getAllTeams();
-  const totalSkills = teams.reduce((sum, t) => sum + t.gstackSkills.length + t.tbrainSkills.length, 0);
+  const totalSkills = teams.reduce((sum, t) => sum + t.astackSkills.length + t.tbrainSkills.length, 0);
 
   return (
     <div className="relative">
@@ -122,7 +122,7 @@ export default function MarketingHome() {
           />
           <Rule
             title="Append-only evidence trails."
-            body="Editable summary at top, immutable timeline below. Per the GBrain Compiled-Truth pattern."
+            body="Editable summary at top, immutable timeline below. The compiled-truth pattern, baked into every brain page."
           />
           <Rule
             title="No fabricated facts."

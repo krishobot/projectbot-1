@@ -14,7 +14,7 @@ cp HEARTBEAT.md.example HEARTBEAT.md
 # Edit each one. Replace every {{placeholder}}.
 ```
 
-If you'd rather have an interview-style guided setup, run `gbrain soul-audit` once gbrain is installed — it walks through six phases and writes the files for you.
+If you'd rather have an interview-style guided setup, run `tbrain soul-audit` once tbrain is installed — it walks through six phases and writes the files for you.
 
 ## Privacy
 

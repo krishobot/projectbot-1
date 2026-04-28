@@ -6,12 +6,12 @@
 
 | Skill | Source | What it does |
 |---|---|---|
-| `query` | gbrain | The brain's hybrid-search front door (shared with Sales — different use). Use for ad-hoc analytical queries. |
-| `reports` | gbrain | Generate timestamped, keyword-routed analytical reports. |
-| `/benchmark` | gstack | Performance regression detection. |
-| `/benchmark-models` | gstack | Compare models on the same prompt — quality regression detection. |
-| **BrainBench** | sibling repo (`gbrain-evals`) | Public benchmark for personal-knowledge agent stacks. Lives in [github.com/garrytan/gbrain-evals](https://github.com/garrytan/gbrain-evals) — install separately when running evals. |
-| `eval` (gbrain CLI) | gbrain | `gbrain eval`: single-run table + A/B config comparison over a retrieval qrels set. |
+| `query` | tbrain | The brain's hybrid-search front door (shared with Sales — different use). Use for ad-hoc analytical queries. |
+| `reports` | tbrain | Generate timestamped, keyword-routed analytical reports. |
+| `/benchmark` | astack | Performance regression detection. |
+| `/benchmark-models` | astack | Compare models on the same prompt — quality regression detection. |
+| **BrainBench** | external | Public benchmark for personal-knowledge agent stacks. Lives in [github.com/astack/astack-evals](https://github.com/astack/astack-evals) — install separately when running evals. |
+| `eval` (gbrain CLI) | tbrain | `gbrain eval`: single-run table + A/B config comparison over a retrieval qrels set. |
 
 ## When to invoke this team
 
