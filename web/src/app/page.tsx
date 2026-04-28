@@ -11,15 +11,11 @@ export default function Home() {
   return (
     <div className="space-y-12">
       <section>
-        <div className="flex items-end justify-between gap-6 flex-wrap">
-          <div>
-            <h1 className="text-4xl font-semibold tracking-tight">Your virtual company</h1>
-            <p className="text-zinc-400 mt-2 max-w-xl">
-              Thirteen teams. One brain. Click a team to see its skills, charter, and handoffs — then launch a Claude Code session scoped to that role.
-            </p>
-          </div>
-          <BrainStatusBadge status={brain} />
-        </div>
+        <h1 className="text-4xl font-semibold tracking-tight">Your virtual company</h1>
+        <p className="text-zinc-400 mt-2 max-w-xl">
+          Thirteen teams. One brain. Click a team to see its skills, charter, and handoffs — then launch a Claude Code session scoped to that role.
+        </p>
+        <BrainStatusLine status={brain} />
       </section>
 
       <section>
@@ -50,21 +46,23 @@ export default function Home() {
   );
 }
 
-function BrainStatusBadge({ status }: { status: ReturnType<typeof getBrainStatus> }) {
+function BrainStatusLine({ status }: { status: ReturnType<typeof getBrainStatus> }) {
   if (!status.ok) {
     return (
-      <div className="rounded-lg border border-amber-900/40 bg-amber-950/30 px-4 py-2 text-xs text-amber-300">
-        <div className="font-mono uppercase tracking-wide text-amber-400 text-[10px]">tbrain offline</div>
-        <div className="text-amber-200/80 mt-0.5">install gbrain CLI to connect</div>
+      <div className="mt-4 inline-flex items-center gap-2 text-xs text-zinc-500">
+        <span className="w-1.5 h-1.5 rounded-full bg-amber-500" aria-hidden />
+        <span className="font-mono uppercase tracking-wide text-amber-500/80">tbrain offline</span>
+        <span className="text-zinc-600">·</span>
+        <span>install gbrain CLI to connect</span>
       </div>
     );
   }
   return (
-    <div className="rounded-lg border border-emerald-900/40 bg-emerald-950/30 px-4 py-2 text-xs">
-      <div className="font-mono uppercase tracking-wide text-emerald-400 text-[10px]">tbrain connected</div>
-      <div className="text-emerald-200/80 mt-0.5 font-mono">
-        {status.pages} pages · {status.chunks} chunks · {status.links} links
-      </div>
+    <div className="mt-4 inline-flex items-center gap-2 text-xs text-zinc-500">
+      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" aria-hidden />
+      <span className="font-mono uppercase tracking-wide text-emerald-400/80">tbrain connected</span>
+      <span className="text-zinc-600">·</span>
+      <span className="font-mono">{status.pages} pages · {status.chunks} chunks · {status.links} links</span>
     </div>
   );
 }
