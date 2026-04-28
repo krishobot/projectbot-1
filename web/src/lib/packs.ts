@@ -45,7 +45,7 @@ export const PACKS: Pack[] = [
       "Customer Success, Sales, and Operations teams tuned for client-shop owners. Brain templates for client onboarding, monthly reporting, retainer pipelines, and scope-creep defense.",
     status: "live",
     price: { usd: 50, inr: 3999 },
-    gumroadUrl: "https://gumroad.com/l/astack-agency-pack",
+    gumroadUrl: "https://tanirudh.gumroad.com/l/agencypack",
     highlights: [
       "3 tuned team manifests (10 Sales, 11 Customer Success, 12 Operations)",
       "Brain templates for client portfolios, retainer math, monthly reports",
@@ -65,7 +65,7 @@ export const PACKS: Pack[] = [
       "Engineering, Product, and Release teams tuned for one-engineer startups. Brain templates for architecture decisions, sprint cadence, customer feedback ingestion, and release rituals.",
     status: "live",
     price: { usd: 50, inr: 3999 },
-    gumroadUrl: "https://gumroad.com/l/astack-technical-founder-pack",
+    gumroadUrl: "https://tanirudh.gumroad.com/l/Technicalfounderpack",
     highlights: [
       "3 tuned team manifests (02 Product, 03 Engineering, 06 Release / DevOps)",
       "Brain templates for ADRs, customer-feedback ingestion, sprint retros",
@@ -85,7 +85,7 @@ export const PACKS: Pack[] = [
       "agency-pack + technical-founder-pack. For founders who run both motions — a small client shop alongside a side-SaaS, or a dev consultancy moving toward product.",
     status: "live",
     price: { usd: 80, inr: 6499 },
-    gumroadUrl: "https://gumroad.com/l/astack-specialty-bundle",
+    gumroadUrl: "https://tanirudh.gumroad.com/l/Specialtypack",
     bundleOf: ["agency-pack", "technical-founder-pack"],
     highlights: [
       "Both specialty packs (agency + technical-founder)",
