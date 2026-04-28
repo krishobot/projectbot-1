@@ -1,7 +1,20 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import { getCurrentUser } from "@/lib/supabase/server";
 import "./globals.css";
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-sans",
+  display: "swap",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "astack — virtual company in Claude Code",
@@ -13,8 +26,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const supabaseConfigured = !!(process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
 
   return (
-    <html lang="en" className="dark h-full antialiased">
-      <body className="bg-zinc-950 text-zinc-100 min-h-full flex flex-col">
+    <html lang="en" className={`dark h-full antialiased ${inter.variable} ${jetbrainsMono.variable}`}>
+      <body className="bg-zinc-950 text-zinc-100 min-h-full flex flex-col font-sans">
         <header className="border-b border-zinc-800 bg-zinc-950/80 backdrop-blur sticky top-0 z-10">
           <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
             <Link href="/" className="flex items-center gap-3 group min-h-11 -my-2 py-2">

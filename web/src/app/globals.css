@@ -9,12 +9,27 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
 }
 
 html, body {
   background: var(--background);
   color: var(--foreground);
-  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  /* Linear-style OpenType: cv01 = single-storey a, ss03 = alternate g.
+     tnum gives consistent-width digits for stat counters. */
+  font-feature-settings: "cv01", "ss03", "tnum";
+}
+
+/* Display weight + tighter tracking on large headings — Inter as a Display
+   surrogate (Inter Variable scales display-cleanly at large sizes). */
+h1, h2, h3, .font-display {
+  letter-spacing: -0.022em;
+  font-feature-settings: "cv01", "ss03", "ss01";
+}
+h1 {
+  font-weight: 580;
 }
 
 ::selection {
