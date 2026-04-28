@@ -55,3 +55,8 @@ Thumbs.db
 
 # Pack zips — built artifacts. Regenerate with packs/build-packs.sh.
 packs/dist/
+
+# Paid-pack source content lives in a separate private repo
+# (see packs/README.md). Never tracked in this public repo.
+packs/agency-pack/
+packs/technical-founder-pack/

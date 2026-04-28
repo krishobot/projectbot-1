@@ -18,6 +18,21 @@ DIST_DIR="$PACKS_DIR/dist"
 mkdir -p "$DIST_DIR"
 rm -f "$DIST_DIR"/*.zip
 
+# Pre-flight: paid pack sources are not in the public repo. Confirm they're
+# present locally before attempting to build.
+for required in agency-pack technical-founder-pack; do
+  if [ ! -d "$PACKS_DIR/$required" ]; then
+    cat <<EOF >&2
+ERROR: $required/ is missing from $PACKS_DIR/.
+
+Paid pack sources live in a separate private repo
+(github.com/krishobot/astack-packs-private). Clone it into this directory
+before building. See packs/README.md for the full setup.
+EOF
+    exit 1
+  fi
+done
+
 # Read version from each pack.yaml so the zip name matches the manifest.
 get_version() {
   local pack="$1"
