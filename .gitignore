@@ -1,6 +1,9 @@
 # Brain database — never commit binary DB
 .gbrain/
 
+# Personal brain — separate repo, never tracked here
+brain/
+
 # Cloned upstream skills — install via setup script, not by bundling
 gstack/
 gbrain/
