@@ -30,7 +30,7 @@ export default function Home() {
                 <div className="w-9 h-9 rounded-lg bg-zinc-900 border border-zinc-800 flex items-center justify-center font-mono text-xs font-semibold text-zinc-400 group-hover:text-emerald-400 group-hover:border-emerald-900/60 transition">
                   {t.number}
                 </div>
-                <h2 className="text-base font-semibold tracking-tight group-hover:text-white">{t.name}</h2>
+                <h2 className="text-lg font-semibold tracking-tight group-hover:text-white">{t.name}</h2>
               </div>
               <p className="text-sm text-zinc-400 leading-relaxed line-clamp-3 flex-1">{t.charter}</p>
               <div className="mt-4 flex items-center gap-2 text-[11px] text-zinc-500 font-mono">
