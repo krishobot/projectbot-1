@@ -4,22 +4,6 @@ import { getBrainStatus } from "@/lib/brain";
 
 export const dynamic = "force-dynamic";
 
-const ACCENT_BY_NUMBER: Record<string, string> = {
-  "01": "from-amber-500 to-orange-500",
-  "02": "from-emerald-400 to-teal-500",
-  "03": "from-blue-500 to-indigo-500",
-  "04": "from-pink-500 to-rose-500",
-  "05": "from-violet-500 to-purple-500",
-  "06": "from-red-500 to-rose-600",
-  "07": "from-cyan-400 to-sky-500",
-  "08": "from-yellow-400 to-amber-500",
-  "09": "from-fuchsia-500 to-pink-500",
-  "10": "from-lime-400 to-green-500",
-  "11": "from-teal-400 to-emerald-500",
-  "12": "from-zinc-400 to-zinc-500",
-  "13": "from-indigo-400 to-blue-500",
-};
-
 export default function Home() {
   const teams = getAllTeams();
   const brain = getBrainStatus();
@@ -47,9 +31,7 @@ export default function Home() {
               className="group rounded-xl border border-zinc-800 bg-zinc-900/40 hover:bg-zinc-900 hover:border-zinc-700 p-5 transition flex flex-col"
             >
               <div className="flex items-center gap-3 mb-3">
-                <div
-                  className={`w-9 h-9 rounded-lg bg-gradient-to-br ${ACCENT_BY_NUMBER[t.number] ?? "from-zinc-500 to-zinc-700"} flex items-center justify-center font-mono text-xs font-bold text-zinc-950`}
-                >
+                <div className="w-9 h-9 rounded-lg bg-zinc-900 border border-zinc-800 flex items-center justify-center font-mono text-xs font-semibold text-zinc-400 group-hover:text-emerald-400 group-hover:border-emerald-900/60 transition">
                   {t.number}
                 </div>
                 <h2 className="text-base font-semibold tracking-tight group-hover:text-white">{t.name}</h2>
