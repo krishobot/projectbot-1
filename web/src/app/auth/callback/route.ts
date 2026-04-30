@@ -1,5 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
+import { safeNext } from "@/lib/safe-next";
 
 /**
  * OAuth / magic-link callback. Exchanges the `code` query param for a session
@@ -8,7 +9,7 @@ import { getSupabaseServerClient } from "@/lib/supabase/server";
 export async function GET(req: NextRequest) {
   const url = new URL(req.url);
   const code = url.searchParams.get("code");
-  const next = url.searchParams.get("next") ?? "/";
+  const next = safeNext(url.searchParams.get("next"));
 
   if (!code) return NextResponse.redirect(new URL("/login", url.origin));
 

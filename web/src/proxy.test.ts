@@ -40,7 +40,14 @@ describe("proxy — supabase outage handling", () => {
 
     const { proxy } = await import("./proxy");
     const fakeReq = {
-      cookies: { getAll: () => [] },
+      cookies: { getAll: () => [], get: () => undefined },
+      nextUrl: {
+        pathname: "/",
+        protocol: "http:",
+        search: "",
+        searchParams: new URLSearchParams(),
+      },
+      url: "http://localhost:3000/",
     } as unknown as Parameters<typeof proxy>[0];
 
     const out = await proxy(fakeReq);

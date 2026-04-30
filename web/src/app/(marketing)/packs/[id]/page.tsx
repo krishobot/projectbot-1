@@ -62,8 +62,10 @@ export default async function PackLandingPage({ params }: Props) {
                 Pricing TBD
               </span>
             )}
-            {hasPrice && pack.tier !== "bundle" && (
-              <span className="text-sm text-zinc-500">lifetime · v1.x updates</span>
+            {hasPrice && (
+              <span className="text-sm text-zinc-500">
+                lifetime · full OS · repo access included
+              </span>
             )}
             {hasPrice && <CurrencyToggle className="ml-auto" />}
           </div>
@@ -108,50 +110,31 @@ export default async function PackLandingPage({ params }: Props) {
                 <span>{h}</span>
               </li>
             ))}
+            <li className="flex gap-3 text-sm text-emerald-300 leading-relaxed">
+              <span className="text-emerald-400 mt-0.5 font-mono" aria-hidden>★</span>
+              <span>
+                <strong>Plus the full OS:</strong> collaborator access to the
+                private astack + tbrain repo. Fork it, customise it, own it.
+              </span>
+            </li>
           </ul>
         </section>
-
-        {/* Custom-tune upsell */}
-        {pack.customTunePrice && (
-          <section className="border-t border-zinc-900 py-12">
-            <div className="rounded-xl border border-zinc-800 bg-zinc-900/30 p-6">
-              <div className="flex items-baseline justify-between gap-4 flex-wrap">
-                <div>
-                  <p className="text-xs font-mono uppercase tracking-wider text-emerald-400/80 mb-1">
-                    Optional upsell
-                  </p>
-                  <h2 className="text-xl font-semibold tracking-tight">Custom-tune {pack.name}</h2>
-                </div>
-                <Price price={pack.customTunePrice} className="text-2xl font-semibold text-zinc-100" />
-              </div>
-              <p className="mt-3 text-sm text-zinc-400 leading-relaxed max-w-2xl">
-                60-min call + 7 days of editing + custom brain-page templates tuned to your exact
-                ICP, voice, and channels. The pack ships in 4-6 hours of my time, not 30, because
-                it has the spine of {pack.name} underneath. Capped at 10 engagements per month so
-                you actually get time.
-              </p>
-              <p className="mt-3 text-xs text-zinc-500">
-                Available as an addon at checkout. Email after purchase if you decide later.
-              </p>
-            </div>
-          </section>
-        )}
 
         {/* Refund + payment */}
         <section className="border-t border-zinc-900 py-12 grid gap-8 sm:grid-cols-2 text-sm text-zinc-500">
           <div>
             <p className="text-zinc-300 font-semibold mb-2">Payment</p>
             <p className="leading-relaxed">
-              India: Razorpay (UPI, cards, netbanking) in INR.
-              Everywhere else: Stripe (cards) in USD.
-              Switch currency anytime via the toggle above.
+              India: UPI, cards, netbanking in INR. Everywhere else: cards in
+              USD. Switch currency anytime via the toggle above. Checkout runs
+              on Gumroad.
             </p>
           </div>
           <div>
             <p className="text-zinc-300 font-semibold mb-2">Refunds</p>
             <p className="leading-relaxed">
-              48 hours, no questions asked, refund processed back to source. After that, you&apos;ve
-              seen the goods.
+              48 hours, no questions asked, refund processed back to source.
+              After that, you&apos;ve seen the goods.
             </p>
           </div>
         </section>
@@ -163,8 +146,9 @@ export default async function PackLandingPage({ params }: Props) {
               Ready to install {pack.name}?
             </h2>
             <p className="text-zinc-400 mb-8 max-w-xl mx-auto">
-              Checkout via Gumroad — UPI for Indian buyers, cards everywhere else. Discord
-              invite arrives by email after purchase.
+              Buy via Gumroad — UPI for Indian buyers, cards everywhere else.
+              You&apos;ll get the pack files immediately and an email about
+              repo access.
             </p>
             <BuyButton packId={pack.id} gumroadUrl={pack.gumroadUrl} large />
           </section>
@@ -174,9 +158,10 @@ export default async function PackLandingPage({ params }: Props) {
   );
 }
 
-// Ship-light buy button: opens the pack's Gumroad listing in a new tab when
-// the URL is set. Falls back to the demo install page when the listing isn't
-// up yet (ship-light Day 1: list packs on Gumroad → flip the URL on this site).
+// Routes through /buy/<id> — that handler checks Supabase auth and either
+// sends the user to /login (with next pointing back here) or 302s to the
+// pack's Gumroad checkout. After payment, Gumroad's post-purchase URL
+// returns the buyer to /app?purchased=<id> for the celebration modal.
 function BuyButton({
   packId,
   gumroadUrl,
@@ -194,12 +179,11 @@ function BuyButton({
 
   if (gumroadUrl) {
     return (
-      <a href={gumroadUrl} target="_blank" rel="noopener noreferrer" className={cls}>
+      <a href={`/buy/${packId}`} className={cls}>
         Buy {label} →
       </a>
     );
   }
-  // Fallback: preview the install page until Gumroad listing is up.
   return (
     <Link href={`/packs/${packId}/install?demo=1`} className={cls}>
       Buy {label} (preview) →
