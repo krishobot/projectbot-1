@@ -42,3 +42,72 @@ h1 {
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+
+/* Manual page typography — Linear-ish reading width, generous spacing.
+   Used by /manual which renders MANUAL.md via marked. */
+.manual-prose {
+  color: #d4d4d8;
+  line-height: 1.7;
+  font-size: 0.95rem;
+}
+.manual-prose h1, .manual-prose h2, .manual-prose h3, .manual-prose h4 {
+  color: #fafafa;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  scroll-margin-top: 2rem;
+}
+.manual-prose h1 { font-size: 2rem; margin-top: 0; }
+.manual-prose h2 { font-size: 1.5rem; padding-top: 0.5rem; border-top: 1px solid #27272a; }
+.manual-prose h3 { font-size: 1.15rem; }
+.manual-prose h4 { font-size: 1rem; color: #e4e4e7; }
+.manual-prose p { margin: 1rem 0; }
+.manual-prose a { color: #34d399; text-decoration: none; border-bottom: 1px solid rgba(52, 211, 153, 0.3); }
+.manual-prose a:hover { color: #6ee7b7; border-bottom-color: #6ee7b7; }
+.manual-prose ul, .manual-prose ol { margin: 1rem 0; padding-left: 1.5rem; }
+.manual-prose ul { list-style: disc; }
+.manual-prose ol { list-style: decimal; }
+.manual-prose li { margin: 0.4rem 0; }
+.manual-prose code {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.85em;
+  background: #18181b;
+  border: 1px solid #27272a;
+  border-radius: 4px;
+  padding: 0.1em 0.35em;
+  color: #6ee7b7;
+}
+.manual-prose pre {
+  background: #09090b;
+  border: 1px solid #27272a;
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  margin: 1.25rem 0;
+  overflow-x: auto;
+  font-size: 0.85rem;
+  line-height: 1.55;
+}
+.manual-prose pre code {
+  background: transparent;
+  border: none;
+  padding: 0;
+  color: #e4e4e7;
+  font-size: 1em;
+}
+.manual-prose blockquote {
+  border-left: 2px solid rgba(16, 185, 129, 0.4);
+  padding-left: 1rem;
+  margin: 1.25rem 0;
+  color: #a1a1aa;
+  font-style: italic;
+}
+.manual-prose hr {
+  border: none;
+  border-top: 1px solid #27272a;
+  margin: 2.5rem 0;
+}
+.manual-prose strong { color: #fafafa; font-weight: 600; }
+.manual-prose table { border-collapse: collapse; margin: 1.25rem 0; font-size: 0.9rem; }
+.manual-prose th, .manual-prose td { border: 1px solid #27272a; padding: 0.5rem 0.85rem; text-align: left; }
+.manual-prose th { background: #18181b; color: #fafafa; font-weight: 600; }

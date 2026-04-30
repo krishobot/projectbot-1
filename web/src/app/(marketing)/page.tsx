@@ -1,16 +1,30 @@
 import Link from "next/link";
+import { getCurrentUser } from "@/lib/supabase/server";
 import { getAllTeams } from "@/lib/teams";
+import { getLivePacks, formatPrice, type Pack } from "@/lib/packs";
 
 export const dynamic = "force-dynamic";
 
-export default function MarketingHome() {
+// Homepage. Pay-first model: no magic-link form on the homepage. Big "Buy a
+// pack" CTAs. The magic link is only ever sent after a purchase — buyers
+// arrive at /login post-Gumroad-redirect to enter the email they want their
+// access link sent to.
+//
+// Signed-in users still see this page (no auto-redirect to /app) — they get
+// an extra "Open the workspace →" CTA so they can choose to enter when they
+// want, instead of being teleported in on every visit.
+export default async function MarketingHome() {
+  const user = await getCurrentUser();
   const teams = getAllTeams();
-  const totalSkills = teams.reduce((sum, t) => sum + t.astackSkills.length + t.tbrainSkills.length, 0);
+  const totalSkills = teams.reduce(
+    (sum, t) => sum + t.astackSkills.length + t.tbrainSkills.length,
+    0,
+  );
+  const packs = getLivePacks();
 
   return (
     <div className="relative">
-      {/* Soft conic gradient behind the hero — Linear-ish atmosphere, no
-          decorative blobs. Sits below content via -z-10. */}
+      {/* Soft conic gradient backdrop */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
@@ -22,35 +36,49 @@ export default function MarketingHome() {
       <section className="max-w-5xl mx-auto px-6 pt-24 pb-20">
         <div className="inline-flex items-center gap-2 rounded-full border border-zinc-800 bg-zinc-900/40 px-3 py-1 text-xs text-zinc-400 mb-8">
           <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" aria-hidden />
-          v0.1 · open source · MIT
+          v0.1 · paid early access
         </div>
         <h1 className="text-5xl sm:text-6xl font-semibold tracking-tight leading-[1.05] max-w-3xl">
           The agent workspace for{" "}
           <span className="text-emerald-400">shipping a company</span> by yourself.
         </h1>
         <p className="mt-6 text-lg text-zinc-400 leading-relaxed max-w-2xl">
-          13 specialised AI teams wired into a persistent markdown brain. Each team owns its
-          decisions, hands work off through files, and remembers what shipped — across every
-          machine you sit at.
+          13 specialised AI teams wired into a persistent markdown brain. Each
+          team owns its decisions, hands work off through files, and remembers
+          what shipped — across every machine you sit at.
         </p>
+
         <div className="mt-10 flex flex-wrap items-center gap-3">
+          {user ? (
+            <Link
+              href="/app"
+              className="rounded-lg bg-emerald-500 hover:bg-emerald-400 text-zinc-950 px-5 py-3 text-sm font-semibold transition"
+            >
+              Open the workspace →
+            </Link>
+          ) : (
+            <Link
+              href="/packs"
+              className="rounded-lg bg-emerald-500 hover:bg-emerald-400 text-zinc-950 px-5 py-3 text-sm font-semibold transition"
+            >
+              Buy a pack — get the full OS →
+            </Link>
+          )}
           <Link
-            href="/app"
-            className="rounded-lg bg-emerald-500 hover:bg-emerald-400 text-zinc-950 px-5 py-3 text-sm font-semibold transition"
+            href={user ? "/packs" : "/login"}
+            className="rounded-lg border border-zinc-800 hover:border-zinc-700 hover:bg-zinc-900/50 text-zinc-200 px-5 py-3 text-sm font-medium transition"
           >
-            Open the workspace →
+            {user ? "See the packs" : "Already bought? Sign in"}
           </Link>
-          <a
-            href="https://github.com/krishobot/projectbot-1"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="rounded-lg border border-zinc-800 hover:border-zinc-700 hover:bg-zinc-900/50 text-zinc-200 px-5 py-3 text-sm font-medium transition inline-flex items-center gap-2"
-          >
-            <span>Read the source</span>
-            <span className="text-zinc-500">↗</span>
-          </a>
         </div>
-        <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-zinc-500 font-mono">
+
+        <p className="mt-6 text-xs text-zinc-500 leading-relaxed max-w-md">
+          One pack purchase unlocks the full astack + tbrain workspace, the
+          manual, and collaborator access to the source repo. Magic link to
+          your inbox the moment Gumroad confirms the sale.
+        </p>
+
+        <div className="mt-12 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-zinc-500 font-mono">
           <span>{teams.length} teams</span>
           <span className="text-zinc-700">·</span>
           <span>{totalSkills} skills</span>
@@ -61,59 +89,100 @@ export default function MarketingHome() {
         </div>
       </section>
 
-      {/* WHAT IT IS — three crisp lines, not a 3-feature card grid */}
+      {/* PACKS — paid entry points, prominently above the fold context */}
+      <section className="max-w-5xl mx-auto px-6 py-20 border-t border-zinc-900">
+        <div className="flex items-end justify-between gap-6 flex-wrap mb-8">
+          <div>
+            <p className="text-xs font-mono uppercase tracking-wider text-zinc-500 mb-2">
+              Packs available
+            </p>
+            <h2 className="text-3xl font-semibold tracking-tight">
+              Pick your pack. Get the whole OS.
+            </h2>
+            <p className="mt-2 text-zinc-400 max-w-xl text-sm leading-relaxed">
+              Every pack ships with the full astack + tbrain source plus team
+              manifests tuned for your business shape. Buy once, lifetime.
+            </p>
+          </div>
+          <Link
+            href="/packs"
+            className="text-sm text-emerald-400 hover:text-emerald-300 transition"
+          >
+            Compare all →
+          </Link>
+        </div>
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {packs.map((p) => (
+            <HomePackCard key={p.id} pack={p} />
+          ))}
+        </div>
+        <p className="mt-6 text-xs text-zinc-500 max-w-xl">
+          UPI for India, cards everywhere else. Magic link arrives in your
+          inbox the moment Gumroad confirms — one click and you&apos;re in.
+        </p>
+      </section>
+
+      {/* WHAT IT IS */}
       <section className="max-w-5xl mx-auto px-6 py-20 border-t border-zinc-900">
         <p className="text-xs font-mono uppercase tracking-wider text-zinc-500 mb-6">What it is</p>
         <div className="grid gap-12 sm:grid-cols-2">
           <div>
-            <h2 className="text-2xl font-semibold tracking-tight mb-3">A virtual company in your terminal.</h2>
+            <h2 className="text-2xl font-semibold tracking-tight mb-3">
+              A virtual company in your terminal.
+            </h2>
             <p className="text-zinc-400 leading-relaxed">
-              Each of the 13 teams is a Claude Code session scoped to a single charter — Executive,
-              Engineering, Design, Marketing, Sales — with a curated set of skills and brain pages
-              it owns. You launch the team you need; it knows its job before you say a word.
+              Each of the 13 teams is a Claude Code session scoped to a single
+              charter — Executive, Engineering, Design, Marketing, Sales — with
+              a curated set of skills and brain pages it owns. You launch the
+              team you need; it knows its job before you say a word.
             </p>
           </div>
           <div>
-            <h2 className="text-2xl font-semibold tracking-tight mb-3">A brain that survives the chat window.</h2>
+            <h2 className="text-2xl font-semibold tracking-tight mb-3">
+              A brain that survives the chat window.
+            </h2>
             <p className="text-zinc-400 leading-relaxed">
-              <span className="font-mono text-emerald-400">tbrain</span> is markdown plus
-              Postgres plus pgvector. Every person, deal, decision and meeting your agents touch
-              gets a page. Every team reads from the same source of truth. Nothing lives in scrollback.
+              <span className="font-mono text-emerald-400">tbrain</span> is
+              markdown plus Postgres plus pgvector. Every person, deal,
+              decision and meeting your agents touch gets a page. Every team
+              reads from the same source of truth. Nothing lives in scrollback.
             </p>
           </div>
         </div>
       </section>
 
-      {/* THE 13 — flat list, alphabetical structure with role grouping */}
+      {/* THE 13 */}
       <section className="max-w-5xl mx-auto px-6 py-20 border-t border-zinc-900">
         <p className="text-xs font-mono uppercase tracking-wider text-zinc-500 mb-6">The 13 teams</p>
         <div className="grid gap-x-12 gap-y-3 sm:grid-cols-2 lg:grid-cols-3 text-sm">
           {teams.map((t) => (
-            <Link
+            <div
               key={t.id}
-              href={`/teams/${t.id}`}
-              className="group flex items-baseline gap-3 py-2 -mx-2 px-2 rounded hover:bg-zinc-900/50 transition"
+              className="flex items-baseline gap-3 py-2 -mx-2 px-2"
             >
-              <span className="font-mono text-xs text-zinc-600 w-6 group-hover:text-emerald-500/80">
+              <span className="font-mono text-xs text-zinc-600 w-6">
                 {t.number}
               </span>
-              <span className="text-zinc-200 group-hover:text-white">{t.name}</span>
-              <span className="ml-auto text-xs text-zinc-600 font-mono opacity-0 group-hover:opacity-100 transition">
-                →
-              </span>
-            </Link>
+              <span className="text-zinc-300">{t.name}</span>
+            </div>
           ))}
         </div>
+        <p className="mt-6 text-xs text-zinc-500">
+          Each team unlocks once you buy a pack. Magic link to your inbox; one
+          click and you&apos;re in.
+        </p>
       </section>
 
-      {/* HOW IT'S USED — two illustrative end-to-end walkthroughs */}
+      {/* HOW IT'S USED */}
       <section className="max-w-5xl mx-auto px-6 py-20 border-t border-zinc-900">
         <div className="mb-8">
           <p className="text-xs font-mono uppercase tracking-wider text-zinc-500">
             What it looks like end-to-end
           </p>
           <p className="text-sm text-zinc-500 mt-2 max-w-2xl">
-            Two illustrative walkthroughs of a single human running the whole company. Names and numbers are scaffolding to make the workflow concrete — not customer testimonials.
+            Two illustrative walkthroughs of a single human running the whole
+            company. Names and numbers are scaffolding to make the workflow
+            concrete — not customer testimonials.
           </p>
         </div>
         <div className="space-y-16">
@@ -221,25 +290,93 @@ export default function MarketingHome() {
             One person, thirteen roles, one brain.
           </h2>
           <p className="text-zinc-400 max-w-xl">
-            Free and open source. Self-host the workspace, run the brain on your machine or on
-            Supabase. No accounts, no SaaS, no telemetry on by default.
+            Buy any pack. Receive your magic link the moment Gumroad confirms.
+            One click and you&apos;re inside the workspace, with the full
+            astack + tbrain source unlocked.
           </p>
           <div className="flex flex-wrap gap-3 mt-2">
-            <Link
-              href="/app"
-              className="rounded-lg bg-emerald-500 hover:bg-emerald-400 text-zinc-950 px-5 py-3 text-sm font-semibold transition"
-            >
-              Open the workspace →
-            </Link>
-            <Link
-              href="/setup/mcp"
-              className="rounded-lg border border-zinc-800 hover:border-zinc-700 hover:bg-zinc-900/50 text-zinc-200 px-5 py-3 text-sm font-medium transition"
-            >
-              Connect to Claude
-            </Link>
+            {user ? (
+              <>
+                <Link
+                  href="/app"
+                  className="rounded-lg bg-emerald-500 hover:bg-emerald-400 text-zinc-950 px-5 py-3 text-sm font-semibold transition"
+                >
+                  Open the workspace →
+                </Link>
+                <Link
+                  href="/packs"
+                  className="rounded-lg border border-zinc-800 hover:border-zinc-700 hover:bg-zinc-900/50 text-zinc-200 px-5 py-3 text-sm font-medium transition"
+                >
+                  See the packs
+                </Link>
+              </>
+            ) : (
+              <>
+                <Link
+                  href="/packs"
+                  className="rounded-lg bg-emerald-500 hover:bg-emerald-400 text-zinc-950 px-5 py-3 text-sm font-semibold transition"
+                >
+                  See the packs →
+                </Link>
+                <Link
+                  href="/login"
+                  className="rounded-lg border border-zinc-800 hover:border-zinc-700 hover:bg-zinc-900/50 text-zinc-200 px-5 py-3 text-sm font-medium transition"
+                >
+                  Already bought? Sign in
+                </Link>
+              </>
+            )}
           </div>
         </div>
       </section>
+    </div>
+  );
+}
+
+function HomePackCard({ pack }: { pack: Pack }) {
+  const isBundle = pack.tier === "bundle";
+  return (
+    <div
+      className={`rounded-xl border p-5 flex flex-col ${
+        isBundle
+          ? "border-emerald-900/60 bg-emerald-950/30"
+          : "border-zinc-800 bg-zinc-900/40"
+      }`}
+    >
+      <div className="flex items-baseline justify-between mb-2">
+        <p
+          className={`text-[10px] font-mono uppercase tracking-wider ${
+            isBundle ? "text-emerald-400" : "text-zinc-500"
+          }`}
+        >
+          {isBundle ? "Bundle" : "Specialty"}
+        </p>
+        {pack.price && (
+          <span className="text-xs font-mono text-zinc-400">
+            {formatPrice(pack.price, "usd")}
+          </span>
+        )}
+      </div>
+      <h3 className="text-lg font-semibold tracking-tight text-zinc-100">
+        {pack.name}
+      </h3>
+      <p className="mt-1.5 text-sm text-zinc-400 leading-relaxed line-clamp-3 flex-1">
+        {pack.tagline}
+      </p>
+      <div className="mt-4 flex gap-2">
+        <a
+          href={`/buy/${pack.id}`}
+          className="flex-1 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-zinc-950 px-3 py-2 text-sm font-semibold transition text-center"
+        >
+          Buy →
+        </a>
+        <Link
+          href={`/packs/${pack.id}`}
+          className="rounded-lg border border-zinc-800 hover:border-zinc-700 hover:bg-zinc-900/50 text-zinc-300 px-3 py-2 text-sm transition"
+        >
+          Details
+        </Link>
+      </div>
     </div>
   );
 }

@@ -13,8 +13,14 @@ async function detectInitialCurrency(): Promise<"usd" | "inr"> {
   return country.toUpperCase() === "IN" ? "inr" : "usd";
 }
 
-export default async function PacksCatalogPage() {
+type PageProps = {
+  searchParams: Promise<{ paywall?: string }>;
+};
+
+export default async function PacksCatalogPage({ searchParams }: PageProps) {
   const initialCurrency = await detectInitialCurrency();
+  const { paywall } = await searchParams;
+  const showPaywallBanner = paywall === "1";
   const livePacks = getLivePacks();
   const comingSoonPacks = getComingSoonPacks();
 
@@ -25,6 +31,17 @@ export default async function PacksCatalogPage() {
   return (
     <CurrencyProvider initialCurrency={initialCurrency}>
       <div className="max-w-5xl mx-auto px-6 py-16">
+        {showPaywallBanner && (
+          <div className="mb-10 rounded-xl border border-emerald-900/50 bg-emerald-950/30 p-5">
+            <p className="text-xs font-mono uppercase tracking-wider text-emerald-300/90 mb-2">
+              You&apos;re signed in
+            </p>
+            <p className="text-sm text-zinc-200 leading-relaxed">
+              One step left. Pick a pack below to unlock the workspace and get
+              the full astack + tbrain source.
+            </p>
+          </div>
+        )}
         <header className="mb-12">
           <p className="text-xs font-mono uppercase tracking-wider text-zinc-500 mb-3">
             astack packs
@@ -32,12 +49,13 @@ export default async function PacksCatalogPage() {
           <div className="flex items-end justify-between gap-6 flex-wrap">
             <div>
               <h1 className="text-4xl sm:text-5xl font-semibold tracking-tight max-w-2xl leading-tight">
-                Pre-built virtual teams for one-human companies.
+                Buy a pack. Get the whole OS.
               </h1>
-              <p className="mt-4 text-zinc-400 max-w-xl leading-relaxed">
-                Each pack is a curated set of astack team manifests, brain-page templates,
-                prompts, and a walkthrough video — tuned for one shape of business. Buy once.
-                Lifetime access. Buyer-only Discord + monthly office hours included.
+              <p className="mt-4 text-zinc-400 max-w-2xl leading-relaxed">
+                Every pack ships with the full astack + tbrain source. You get
+                the team manifests tuned for your business shape, the brain
+                templates, and collaborator access to the private repo so you
+                can fork and own it. Buy once, lifetime.
               </p>
             </div>
             <CurrencyToggle />
@@ -80,16 +98,16 @@ export default async function PacksCatalogPage() {
           </p>
           <div className="grid gap-8 sm:grid-cols-2">
             <Feature
-              title="Lifetime access to v1.x updates."
-              body="Buy once. Curation evolves. We email you when a meaningful update lands."
+              title="The full OS source."
+              body="Collaborator access to the private astack + tbrain repo. The 13-team org, the brain CLI, every skill, every template. Fork it and own it."
             />
             <Feature
-              title="Buyer Discord."
-              body="A small room of buyers running the same playbook. Not a free Slack with 5,000 lurkers."
+              title="Tuned team manifests."
+              body="Three to five astack teams curated for your business shape — charters, skill allowlists, brain-page ownership pre-edited."
             />
             <Feature
-              title="Real walkthrough video."
-              body="15-22 minutes per pack. Install → first day → first real workflow. Recorded against actual usage, not a demo."
+              title="Lifetime updates."
+              body="Buy once. When the curation evolves, you pull updates from the same repo."
             />
             <Feature
               title="UPI for India, cards everywhere."
@@ -103,16 +121,16 @@ export default async function PacksCatalogPage() {
           <div>
             <p className="text-zinc-300 font-semibold mb-2">License</p>
             <p className="leading-relaxed">
-              MIT for the code. CC-BY-NC-ND 4.0 for the playbook docs (use them in your own
-              org; don&apos;t resell or rebadge them). One human per license. Use across as
-              many of your own projects as you want.
+              MIT for the code. CC-BY-NC-ND 4.0 for the playbook docs (use them
+              in your own org; don&apos;t resell or rebadge them). One human
+              per license. Use across as many of your own projects as you want.
             </p>
           </div>
           <div>
             <p className="text-zinc-300 font-semibold mb-2">Refunds</p>
             <p className="leading-relaxed">
-              48 hours, no questions asked, refund processed back to source. After that,
-              you&apos;ve seen the goods.
+              48 hours, no questions asked, refund processed back to source.
+              After that, you&apos;ve seen the goods.
             </p>
           </div>
         </section>
@@ -164,10 +182,12 @@ function PackCard({ pack, bundle }: { pack: Pack; bundle?: boolean }) {
           <>
             <Price price={pack.price!} className="text-3xl font-semibold text-zinc-100" />
             {!isBundle && (
-              <span className="text-xs text-zinc-500 ml-2">lifetime · v1.x updates</span>
+              <span className="text-xs text-zinc-500 ml-2">lifetime · full OS</span>
             )}
             {isBundle && pack.bundleOf && (
-              <span className="text-xs text-emerald-500/80 ml-2">{pack.bundleOf.length} packs</span>
+              <span className="text-xs text-emerald-500/80 ml-2">
+                {pack.bundleOf.length} packs · full OS
+              </span>
             )}
           </>
         ) : (
