@@ -36,10 +36,11 @@ function setPaidCookie(res: NextResponse, isHttps: boolean) {
  *      (cached in the `astack-paid` cookie for 24h to avoid DB hits on
  *      every page navigation).
  *
- * The `?purchased=<id>` redirect from Gumroad's thank-you page is a
- * fast-path: if a buyer arrives at /app?purchased=<id> we trust the
- * URL param and immediately set the cache cookie, then the webhook
- * lands the row asynchronously.
+ * The `?purchased=<id>` redirect from Gumroad's thank-you page does NOT by
+ * itself grant access — only a real DB row does. If the webhook hasn't
+ * landed yet (rare race; Gumroad fires it before the redirect), we let the
+ * single `?purchased=` request through so the celebration modal fires, but
+ * we don't issue the cache cookie. The next navigation re-checks the DB.
  *
  * Skipped entirely in single-user local mode (when Supabase env vars are
  * not set). Next.js 16 renamed this convention from `middleware` to `proxy`.
@@ -85,13 +86,7 @@ export async function proxy(req: NextRequest) {
     return NextResponse.redirect(loginUrl);
   }
 
-  // Fast-path 1: post-Gumroad redirect — trust the URL param, set cache.
-  if (purchased) {
-    setPaidCookie(res, isHttps);
-    return res;
-  }
-
-  // Fast-path 2: the cache cookie is still valid.
+  // Cache cookie still valid — skip the DB roundtrip.
   const cachedPaid = req.cookies.get(PAID_COOKIE)?.value === "1";
   if (cachedPaid) return res;
 
@@ -104,6 +99,13 @@ export async function proxy(req: NextRequest) {
     setPaidCookie(res, isHttps);
     return res;
   }
+
+  // Post-Gumroad race: buyer just landed at /app?purchased=<id> but the
+  // webhook hasn't recorded the row yet. Allow this single request through
+  // so the celebration modal fires, but DON'T set the cache cookie — the
+  // next navigation will re-check the DB. By then the webhook should have
+  // landed; if it hasn't, the user gets bounced and can refresh.
+  if (purchased) return res;
 
   const packsUrl = new URL("/packs", req.url);
   packsUrl.searchParams.set("paywall", "1");

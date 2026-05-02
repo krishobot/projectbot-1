@@ -6,9 +6,9 @@ import { getLivePacks, formatPrice, type Pack } from "@/lib/packs";
 export const dynamic = "force-dynamic";
 
 // Homepage. Pay-first model: no magic-link form on the homepage. Big "Buy a
-// pack" CTAs. The magic link is only ever sent after a purchase — buyers
-// arrive at /login post-Gumroad-redirect to enter the email they want their
-// access link sent to.
+// pack" CTAs. After Gumroad confirms payment it redirects buyers straight
+// into the workspace; if they're on a new device or signed out, /login
+// shows the magic-link form with post-purchase copy.
 //
 // Signed-in users still see this page (no auto-redirect to /app) — they get
 // an extra "Open the workspace →" CTA so they can choose to enter when they
@@ -74,8 +74,8 @@ export default async function MarketingHome() {
 
         <p className="mt-6 text-xs text-zinc-500 leading-relaxed max-w-md">
           One pack purchase unlocks the full astack + tbrain workspace, the
-          manual, and collaborator access to the source repo. Magic link to
-          your inbox the moment Gumroad confirms the sale.
+          manual, and collaborator access to the source repo. Gumroad drops
+          you into the workspace the moment payment clears.
         </p>
 
         <div className="mt-12 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-zinc-500 font-mono">
@@ -117,8 +117,8 @@ export default async function MarketingHome() {
           ))}
         </div>
         <p className="mt-6 text-xs text-zinc-500 max-w-xl">
-          UPI for India, cards everywhere else. Magic link arrives in your
-          inbox the moment Gumroad confirms — one click and you&apos;re in.
+          UPI for India, cards everywhere else. Gumroad redirects you straight
+          into the workspace the moment payment clears.
         </p>
       </section>
 
@@ -168,8 +168,9 @@ export default async function MarketingHome() {
           ))}
         </div>
         <p className="mt-6 text-xs text-zinc-500">
-          Each team unlocks once you buy a pack. Magic link to your inbox; one
-          click and you&apos;re in.
+          Each team unlocks once you buy a pack. Gumroad redirects you into
+          the workspace right after payment; sign in by email from any other
+          device.
         </p>
       </section>
 
@@ -290,9 +291,9 @@ export default async function MarketingHome() {
             One person, thirteen roles, one brain.
           </h2>
           <p className="text-zinc-400 max-w-xl">
-            Buy any pack. Receive your magic link the moment Gumroad confirms.
-            One click and you&apos;re inside the workspace, with the full
-            astack + tbrain source unlocked.
+            Buy any pack. Gumroad drops you into the workspace the moment
+            payment clears, with the full astack + tbrain source unlocked.
+            Switching devices? Sign in by email — magic link, one click.
           </p>
           <div className="flex flex-wrap gap-3 mt-2">
             {user ? (
